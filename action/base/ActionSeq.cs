@@ -24,15 +24,15 @@ namespace ns_artDesk
             mActs.Add(act);
         }
 
-        public override void init()
+        public override void init(EntityBase entity)
         {
-            base.init();
+            base.init(entity);
             mActionIdx = 0;
             if(mActionIdx < mActs.Count)
-                mActs[mActionIdx].init();
+                mActs[mActionIdx].init(entity);
         }
         int mActionIdx = int.MaxValue;
-        public override void update(EntityBase entity)
+        public override void update()
         {
             if(mState != EState.undating)
             {
@@ -53,7 +53,7 @@ namespace ns_artDesk
                     return;
                 }
                 ActionBase s = mActs[mActionIdx];
-                s.update(entity);
+                s.update();
                 if (s.state == EState.undating)
                 {
                     return;
@@ -109,7 +109,7 @@ namespace ns_artDesk
                     }
                 }
                 s = mActs[mActionIdx];
-                s.init();
+                s.init(mEntity);
             }
         }
 

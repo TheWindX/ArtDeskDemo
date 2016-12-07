@@ -21,14 +21,14 @@ namespace ns_artDesk
             }
             mAction = act;
             mAction.reset();
-            mAction.init();
+            init();
         }
 
         public void init()
         {
             if (mAction == null) return;
             mAction.reset();
-            mAction.init();
+            mAction.init(this);
         }
 
         public void update()
@@ -36,13 +36,14 @@ namespace ns_artDesk
             if (mAction == null) return;
             if (mAction.state == ActionBase.EState.undating)
             {
-                mAction.update(this);
+                mAction.update();
             }
         }
 
         public void exit()
         {
             if (mAction == null) return;
+            if (mAction.state == ActionBase.EState.undating) return;
             mAction.cancel();
         }
     }

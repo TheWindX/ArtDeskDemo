@@ -55,27 +55,40 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="core\action\ActionBase.cs" />
-    <Compile Include="core\action\ActionPar.cs" />
-    <Compile Include="core\action\ActionSeq.cs" />
+    <Compile Include="action\ActionMove.cs" />
+    <Compile Include="action\base\ActionBase.cs" />
+    <Compile Include="action\base\ActionPar.cs" />
+    <Compile Include="action\base\ActionSeq.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ControlWindow.xaml.cs">
+      <DependentUpon>ControlWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="core\CConsoleLogger.cs" />
+    <Compile Include="core\CEventHub.cs" />
     <Compile Include="core\CFileLogger.cs" />
     <Compile Include="core\CLogger.cs" />
+    <Compile Include="core\CModule.cs" />
     <Compile Include="core\CRandom.cs" />
-    <Compile Include="core\CRunner.cs" />
+    <Compile Include="core\CDriver.cs" />
+    <Compile Include="core\CRuntime.cs" />
     <Compile Include="core\CTimeService.cs" />
+    <Compile Include="core\MetaAttr.cs" />
     <Compile Include="core\Singleton.cs" />
     <Compile Include="entity\ArtApp.cs" />
     <Compile Include="entity\ArtStore.cs" />
     <Compile Include="entity\ArtDesk.cs" />
+    <Compile Include="entity\ArtUI.cs" />
     <Compile Include="entity\EntityBase.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -85,6 +98,7 @@
   <ItemGroup>
     <Compile Include="core\CTimer.cs" />
     <Compile Include="entity\ArtFrame.cs" />
+    <Compile Include="module\TestDeskMove.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

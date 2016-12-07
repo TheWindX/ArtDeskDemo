@@ -26,12 +26,14 @@ namespace ns_artDesk
             }
         }
 
-        public virtual void init()
+        protected EntityBase mEntity = null;
+        public virtual void init(EntityBase entity)
         {
             mState = EState.undating;
+            mEntity = entity;
         }
 
-        public virtual void update(EntityBase entity)
+        public virtual void update()
         {
             mState = EState.succeed;
         }

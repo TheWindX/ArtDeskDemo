@@ -13,7 +13,7 @@ namespace ns_artDesk.core
     using System.Linq;
     using System.Collections.Generic;
     
-    public class CTimer
+    public class CTimerManager
     {
         public class UHeap<T> //where T : class
         {
@@ -262,7 +262,7 @@ namespace ns_artDesk.core
 
         Func<UInt32> mTimer;
         UInt32 mLast = 0;
-        public CTimer(Func<UInt32> t, int id)
+        public CTimerManager(Func<UInt32> t, int id)
         {
             mTimer = t;
             mLast = t();
@@ -360,8 +360,8 @@ namespace ns_artDesk.core
 
         }
 
-        static SortedDictionary<int, CTimer> mID2Timer = new SortedDictionary<int, CTimer>();
-        static SortedDictionary<int, CTimer> mPreID2Timer = new SortedDictionary<int, CTimer>();
+        static SortedDictionary<int, CTimerManager> mID2Timer = new SortedDictionary<int, CTimerManager>();
+        static SortedDictionary<int, CTimerManager> mPreID2Timer = new SortedDictionary<int, CTimerManager>();
         static bool mIDTimerChanged = false;
         static Func<UInt32> mGlobalTimer;
         public static void Init(Func<UInt32> t)
@@ -369,9 +369,9 @@ namespace ns_artDesk.core
             mGlobalTimer = t;
         }
 
-        public static CTimer get(int level = 0)//DEFAULT
+        public static CTimerManager get(int level = 0)//DEFAULT
         {
-            CTimer mout;
+            CTimerManager mout;
             if (mID2Timer.TryGetValue(level, out mout))
             {
                 return mout;
@@ -383,7 +383,7 @@ namespace ns_artDesk.core
                     return mout;
                 }
 
-                var t = new CTimer(mGlobalTimer, level);
+                var t = new CTimerManager(mGlobalTimer, level);
                 if (!mPreID2Timer.ContainsKey(level))
                     mPreID2Timer.Add(level, t);
                 mIDTimerChanged = true;

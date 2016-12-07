@@ -20,16 +20,15 @@ namespace ns_artDesk
         List<ActionBase> subs = new List<ActionBase>();
         List<ActionBase> subsRunning = new List<ActionBase>();
         //重置
-        public override void init()
+        public override void init(EntityBase entity)
         {
-            base.init();
+            base.init(entity);
             subsRunning.Clear();
             foreach (var sub in subs)
             {
-                sub.init();
+                sub.init(entity);
                 subsRunning.Add(sub);
             }
-            
         }
 
         public override void reset()
@@ -42,12 +41,12 @@ namespace ns_artDesk
             subsRunning.Clear();
         }
 
-        public override void update(EntityBase entity)
+        public override void update()
         {
             List<ActionBase> toRemoved = new List<ActionBase>();
             foreach (var sub in subsRunning)
             {
-                sub.update(entity);
+                sub.update();
                 if (sub.state == EState.undating) continue;
                 var r = sub.getResult();
                 if (r)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using ns_artDesk.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -27,12 +29,7 @@ namespace ns_artDesk
         {
             InitializeComponent();
         }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Left = this.Top = 0;
@@ -40,70 +37,75 @@ namespace ns_artDesk
             this.ResizeMode = ResizeMode.NoResize;
             Width = System.Windows.SystemParameters.WorkArea.Width;
             Height = System.Windows.SystemParameters.WorkArea.Height;
-            
+
+            IntPtr hWnd = new WindowInteropHelper(this).Handle;
+            SetWindowPos(hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+            IntPtr windowHandle = (new WindowInteropHelper(this)).Handle;
+            HwndSource src = HwndSource.FromHwnd(windowHandle);
+            src.AddHook(new HwndSourceHook(WndProc));
         }
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern int SystemParametersInfo(
-        int uAction, int uParam, string lpvParam, int fuWinIni);
-
-        //public static ArrayList images;
-        const int SPI_SETDESKWALLPAPER = 20;
-        const int SPIF_UPDATEINIFILE = 0x01;
-        const int SPIF_SENDWININICHANGE = 0x02;
-
-        public enum StyleS_Wallpaper : int
+        private IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            Tiled, Centered, Stretched
+            if (msg == WM_SETFOCUS)
+            {
+                hWnd = new WindowInteropHelper(this).Handle;
+                SetWindowPos(hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+                handled = true;
+            }
+            return IntPtr.Zero;
         }
 
-        public void SetWallpaper(string path, StyleS_Wallpaper selected)
+        private void Window_Initialized(object sender, EventArgs e)
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
-            if (selected == StyleS_Wallpaper.Stretched)
-            {
-                key.SetValue(@"WallpaperStyle", 2.ToString());
-                key.SetValue(@"TileWallpaper", 0.ToString());
-            }
-
-            if (selected == StyleS_Wallpaper.Centered)
-            {
-                key.SetValue(@"WallpaperStyle", 1.ToString());
-                key.SetValue(@"TileWallpaper", 0.ToString());
-            }
-
-            if (selected == StyleS_Wallpaper.Tiled)
-            {
-                key.SetValue(@"WallpaperStyle", 1.ToString());
-                key.SetValue(@"TileWallpaper", 1.ToString());
-            }
-
-            SystemParametersInfo(SPI_SETDESKWALLPAPER,
-                0,
-                path,
-                SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
+            CDriver.Instance.init();
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
 
-
-        private void Grid_KeyDown(object sender, KeyEventArgs e)
+        private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
-            //加了全屏的桌面
-            if(e.Key == Key.D1)
-            {
-                string path = (string)Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop").GetValue("WallPaper");
-                mBG.Background = new ImageBrush(new BitmapImage(new Uri(path)));
-                Console.WriteLine(path);
-            }
-            else if (e.Key == Key.D2)
-            {
-
-            }
-            else if (e.Key == Key.D3)
-            {
-
-            }
+            CDriver.Instance.update();
         }
 
-        //action, 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CDriver.Instance.exit();
+            IntPtr windowHandle = (new WindowInteropHelper(this)).Handle;
+            HwndSource src = HwndSource.FromHwnd(windowHandle);
+            src.RemoveHook(new HwndSourceHook(this.WndProc));
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            CEventHub.Instance.keydown(e.Key);
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            CEventHub.Instance.keyup(e.Key);
+        }
+
+        
+        const UInt32 SWP_NOSIZE = 0x0001;
+        const UInt32 SWP_NOMOVE = 0x0002;
+        const UInt32 SWP_NOACTIVATE = 0x0010;
+        const UInt32 SWP_NOZORDER = 0x0004;
+        const int WM_ACTIVATEAPP = 0x001C;
+        const int WM_ACTIVATE = 0x0006;
+        const int WM_SETFOCUS = 0x0007;
+        static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
+        const int WM_WINDOWPOSCHANGING = 0x0046;
+
+        [DllImport("user32.dll")]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X,
+           int Y, int cx, int cy, uint uFlags);
+        [DllImport("user32.dll")]
+        static extern IntPtr DeferWindowPos(IntPtr hWinPosInfo, IntPtr hWnd,
+           IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+        [DllImport("user32.dll")]
+        static extern IntPtr BeginDeferWindowPos(int nNumWindows);
+        [DllImport("user32.dll")]
+        static extern bool EndDeferWindowPos(IntPtr hWinPosInfo);
+
     }
 }
