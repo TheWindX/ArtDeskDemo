@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Diagnostics;
 
 namespace ns_artDesk
 {
@@ -26,8 +27,9 @@ namespace ns_artDesk
         {
             var w = System.Windows.SystemParameters.WorkArea.Width;
             var h = System.Windows.SystemParameters.WorkArea.Height;
-            getUI().Width = w;
-            getUI().Height = h;
+            getUI().Width = SystemParameters.PrimaryScreenWidth;
+            getUI().Height = SystemParameters.PrimaryScreenHeight;
+            Trace.WriteLine("FullPrimaryScreenHeight: " + SystemParameters.FullPrimaryScreenHeight);
             x = 0;
             y = 0;
             syncWallPaper();
@@ -62,6 +64,18 @@ namespace ns_artDesk
             mMoveOut.mTargetLeft = w;
             mMoveOut.mTagetTop = 0;
             setAction(mMoveOut);
+        }
+
+        const int timeToFade = 1200;
+        ActionFade mFadeIn = new ActionFade(0, timeToFade);
+        ActionFade mFadeOut = new ActionFade(1, timeToFade);
+        public void FadeIn()
+        {   
+            setAction(mFadeIn);
+        }
+        public void FadeOut()
+        {
+            setAction(mFadeOut);
         }
     }
 

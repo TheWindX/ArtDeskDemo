@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="action\ActionFade.cs" />
     <Compile Include="action\ActionMove.cs" />
     <Compile Include="action\base\ActionBase.cs" />
     <Compile Include="action\base\ActionPar.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="ControlWindow.xaml.cs">
       <DependentUpon>ControlWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="core\CComponent.cs" />
     <Compile Include="core\CConsoleLogger.cs" />
     <Compile Include="core\CEventHub.cs" />
     <Compile Include="core\CFileLogger.cs" />
@@ -84,7 +86,9 @@
     <Compile Include="core\CRuntime.cs" />
     <Compile Include="core\CTimeService.cs" />
     <Compile Include="core\MetaAttr.cs" />
-    <Compile Include="core\Singleton.cs" />
+    <Compile Include="core\Util\Singleton.cs" />
+    <Compile Include="core\Util\ListEx.cs" />
+    <Compile Include="core\WindowsUtil.cs" />
     <Compile Include="entity\ArtApp.cs" />
     <Compile Include="entity\ArtStore.cs" />
     <Compile Include="entity\ArtDesk.cs" />
@@ -96,7 +100,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="core\CTimer.cs" />
+    <Compile Include="core\CTimerManager.cs" />
     <Compile Include="entity\ArtFrame.cs" />
     <Compile Include="module\TestDeskMove.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -125,7 +129,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="entity\Component\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

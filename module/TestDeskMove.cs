@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ns_artDesk.core;
+using System.Diagnostics;
 
 namespace ns_artDesk
 {
@@ -18,22 +19,23 @@ namespace ns_artDesk
 
         public void onInit()
         {
-            CEventHub.Instance.evtKeyUp += Instance_evtKeyUp;
+            CEventHub.Instance.evtGlobalKeyUp += Instance_evtGlobalKeyUp;
         }
 
-        private void Instance_evtKeyUp(System.Windows.Input.Key k)
+        private void Instance_evtGlobalKeyUp(System.Windows.Input.Key k)
         {
+            Trace.WriteLine(k.ToString());
             if(k == System.Windows.Input.Key.D0)
             {
                 ArtApp.Instance.quit();
             }
             if (k == System.Windows.Input.Key.D1)
             {
-                ArtDesk.Instance.MoveIn();
+                ArtDesk.Instance.FadeIn();
             }
             if (k == System.Windows.Input.Key.D2)
             {
-                ArtDesk.Instance.MoveOut();
+                ArtDesk.Instance.FadeOut();
             }
         }
 

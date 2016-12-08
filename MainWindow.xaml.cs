@@ -1,22 +1,10 @@
-﻿using Microsoft.Win32;
-using ns_artDesk.core;
+﻿using ns_artDesk.core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ns_artDesk
 {
@@ -35,8 +23,9 @@ namespace ns_artDesk
             this.Left = this.Top = 0;
             this.Topmost = true;
             this.ResizeMode = ResizeMode.NoResize;
-            Width = System.Windows.SystemParameters.WorkArea.Width;
-            Height = System.Windows.SystemParameters.WorkArea.Height;
+            this.WindowState = WindowState.Maximized;
+            //Width = System.Windows.SystemParameters.WorkArea.Width;
+            //Height = System.Windows.SystemParameters.WorkArea.Height;
 
             IntPtr hWnd = new WindowInteropHelper(this).Handle;
             SetWindowPos(hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
@@ -77,12 +66,12 @@ namespace ns_artDesk
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            CEventHub.Instance.keydown(e.Key);
+            CEventHub.Instance.globalKeydown(e.Key);
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            CEventHub.Instance.keyup(e.Key);
+            CEventHub.Instance.globalKeyup(e.Key);
         }
 
         

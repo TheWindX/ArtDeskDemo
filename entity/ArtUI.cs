@@ -34,5 +34,17 @@ namespace ns_artDesk
                 getUI().SetValue(Canvas.TopProperty, value);
             }
         }
+
+        public double opacity
+        {
+            get
+            {
+                return getUI().Opacity;
+            }
+            set
+            {
+                getUI().Opacity = value;
+            }
+        }
     }
 }
