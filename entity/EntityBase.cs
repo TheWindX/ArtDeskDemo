@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ns_artDesk
 {
-    abstract class EntityBase : COMObj
+    abstract class EntityBase
     {
         ActionBase mAction = null;
         public virtual void setAction(ActionBase act)
