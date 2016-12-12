@@ -28,6 +28,7 @@ namespace ns_artDesk.core
             var strDT = CTimeService.Instance.formattedDateTime();
             var content = string.Format("error:\t{0}\t{1}", tag, strFormat, string.Format(strFormat, values));
             fileWriter.WriteLine(content);
+            fileWriter.Flush();
         }
 
         public void info(string tag, string strFormat, params object[] values)
@@ -35,6 +36,7 @@ namespace ns_artDesk.core
             var strDT = CTimeService.Instance.formattedDateTime();
             var content = string.Format("info:\t{0}\t{1}", tag, strFormat, string.Format(strFormat, values));
             fileWriter.WriteLine(content);
+            fileWriter.Flush();
         }
 
         void IDisposable.Dispose()
