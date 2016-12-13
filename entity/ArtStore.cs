@@ -1,4 +1,10 @@
-﻿using ns_artDesk.core;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: 
+ * */
+
+using ns_artDesk.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,9 @@
-﻿using ns_artDesk.core;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: UI移动动画
+ * */
+using ns_artDesk.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;

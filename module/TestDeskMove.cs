@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: 
+ * */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +32,7 @@ namespace ns_artDesk
             Trace.WriteLine(k.ToString());
             if(k == System.Windows.Input.Key.D0)
             {
-                ArtApp.Instance.quit();
+                ArtFrame.Instance.quit();
             }
             if (k == System.Windows.Input.Key.D1)
             {

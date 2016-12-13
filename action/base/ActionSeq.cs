@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: action串行组合
+ * */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: 
+ * */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,32 +16,33 @@ namespace ns_artDesk.core
         List<EntityBase> mEntity = new List<EntityBase>();
         public void init()
         {
-            ArtApp.Instance.init();
             ArtFrame.Instance.init();
             ArtDesk.Instance.init();
             var ts = CTimeService.Instance; //for instance construct
             var eh = CEventHub.Instance; //for instance construct
             CTimerManager.Init(() => (UInt32)ts.getTime());
             CRuntime.Instance.init();
+            CFileDownloadController.Instance.init();
         }
 
         public void update()
         {
-            ArtApp.Instance.update();
             ArtFrame.Instance.update();
             ArtDesk.Instance.update();
             CTimeService.Instance.update();
             CTimerManager.tickAll();
             
             CRuntime.Instance.update();
+            CFileDownloadController.Instance.update();
+
         }
 
         public void exit()
         {
-            ArtApp.Instance.exit();
             ArtFrame.Instance.exit();
             ArtDesk.Instance.exit();
             CRuntime.Instance.exit();
+            CFileDownloadController.Instance.exit();
         }
     }
 }

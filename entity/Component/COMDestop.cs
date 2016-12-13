@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 namespace ns_artDesk
 {
     [RequireCom(typeof(COMLister))]
-    [RequireCom(typeof(COMListItem))]
-    class COMFolder : CComponent
+    class COMDesktop : CComponent
     {
-        public void appItem(COMListItem item)
+        public void append(COMArtApp app)
         {
-            item.location = this;
+            getComponent<COMLister>().items.pushBack(app.getComponent<COMListItem>());
         }
     }
 }

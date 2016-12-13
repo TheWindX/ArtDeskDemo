@@ -1,7 +1,7 @@
 ﻿/*
  * author: xiaofeng.li
  * mail: 453588006@qq.com
- * desc: 
+ * desc: 文件logger
  * */
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace ns_artDesk.core
 {
     class CFileLogger : Singleton<CFileLogger>, IDisposable
     {
-        string outputPath = "log.txt";
+        const string outputPath = "log.txt";
         StreamWriter fileWriter = null;
         public CFileLogger()
         {

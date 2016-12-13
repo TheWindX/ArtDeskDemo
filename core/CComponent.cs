@@ -1,7 +1,7 @@
 ﻿/*
  * author: xiaofeng.li
  * mail: 453588006@qq.com
- * desc: 
+ * desc: 动态组件
  * */
 using System;
 using System.Collections.Generic;

@@ -55,7 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ControlWindow.xaml">
+    <Page Include="view\widget\UIDesk.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\widget\UIIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\window\ControlWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -72,12 +80,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ControlWindow.xaml.cs">
+    <Compile Include="core\CSerializer.cs" />
+    <Compile Include="entity\ArtBrowser.cs" />
+    <Compile Include="entity\Component\COMAPPStore.cs" />
+    <Compile Include="entity\Component\COMDestop.cs" />
+    <Compile Include="entity\Component\COMFolder.cs" />
+    <Compile Include="entity\Component\COMListItem.cs" />
+    <Compile Include="entity\Component\COMLister.cs" />
+    <Compile Include="view\widget\UIDesk.xaml.cs">
+      <DependentUpon>UIDesk.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\widget\UIIcon.xaml.cs">
+      <DependentUpon>UIIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\window\ControlWindow.xaml.cs">
       <DependentUpon>ControlWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="core\CComponent.cs" />
     <Compile Include="core\CConsoleLogger.cs" />
     <Compile Include="core\CEventHub.cs" />
+    <Compile Include="core\CFileDownloader.cs" />
+    <Compile Include="core\CFileDownloadController.cs" />
     <Compile Include="core\CFileLogger.cs" />
     <Compile Include="core\CLogger.cs" />
     <Compile Include="core\CModule.cs" />
@@ -85,11 +108,10 @@
     <Compile Include="core\CDriver.cs" />
     <Compile Include="core\CRuntime.cs" />
     <Compile Include="core\CTimeService.cs" />
-    <Compile Include="core\MetaAttr.cs" />
     <Compile Include="core\Util\Singleton.cs" />
     <Compile Include="core\Util\ListEx.cs" />
     <Compile Include="core\WindowsUtil.cs" />
-    <Compile Include="entity\ArtApp.cs" />
+    <Compile Include="entity\Component\COMArtApp.cs" />
     <Compile Include="entity\ArtStore.cs" />
     <Compile Include="entity\ArtDesk.cs" />
     <Compile Include="entity\ArtUI.cs" />
@@ -103,6 +125,7 @@
     <Compile Include="core\CTimerManager.cs" />
     <Compile Include="entity\ArtFrame.cs" />
     <Compile Include="module\TestDeskMove.cs" />
+    <Compile Include="module\TestFileDownloader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -130,7 +153,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="entity\Component\" />
+    <Folder Include="entity\App\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

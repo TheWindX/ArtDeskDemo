@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: 
+ * */
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -28,13 +33,16 @@ namespace ns_artDesk.core
 
         public string formattedDateTime()
         {
-            return DateTime.Now.ToString("H:mm:ss");
+            return mStrDT;
         }
 
         int mLast = 0;
         int mNow = 0;
+        const string dtFormatter = "H:mm:ss";
+        string mStrDT = DateTime.Now.ToString(dtFormatter);
         public void update()
         {
+            mStrDT = DateTime.Now.ToString(dtFormatter);
             mLast = mNow;
             mNow = (int)mStopWatch.ElapsedMilliseconds;
         }

@@ -1,4 +1,10 @@
-﻿using ns_artDesk.core;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: 
+ * */
+
+using ns_artDesk.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +36,22 @@ namespace ns_artDesk
         }
         public MainWindow getMainWindow()
         {
-            return (ArtApp.Instance.getApp().MainWindow) as MainWindow;
+            return (getApp().MainWindow) as MainWindow;
         }
 
         public ControlWindow getControlWindow()
         {
             return ControlWindow.Instance;
+        }
+
+        public Application getApp()
+        {
+            return Application.Current;
+        }
+
+        public void quit()
+        {
+            getApp().Shutdown();
         }
     }
 }

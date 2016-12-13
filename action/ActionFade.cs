@@ -1,4 +1,9 @@
-﻿using ns_artDesk.core;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: UI淡隐现
+ * */
+using ns_artDesk.core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,8 +25,6 @@ namespace ns_artDesk
         public ActionFade(float targetAlpha, int time)
         {
             mTargetAlpha = targetAlpha;
-            //mTargetLeft = targetLeft;
-            //mTagetTop = tagetTop;
             mTime = time;
         }
 
@@ -31,8 +34,6 @@ namespace ns_artDesk
             base.init(entity);
             mUI = entity as ArtUI;
             mSourceAlpha = mUI.opacity;
-            //mSourceLeft = mUI.x;
-            //mSourceTop = mUI.y;
         }
 
         public override void update()
@@ -49,18 +50,12 @@ namespace ns_artDesk
             Trace.WriteLine("r: " + r.ToString());
             Trace.WriteLine("opacity1: " + mTargetAlpha * r + mSourceAlpha * (1 - r));
             mUI.opacity = mTargetAlpha * r + mSourceAlpha * (1 - r);
-            
-
-            //mUI.x = mTargetLeft * r + mSourceLeft * (1 - r);
-            //mUI.y = mTagetTop * r + mSourceTop * (1 - r);
         }
 
         public override void cancel()
         {
             base.cancel();
             mUI.opacity = mTargetAlpha;
-            //mUI.x = mTargetLeft;
-            //mUI.y = mTagetTop;
         }
 
         public override void reset()
