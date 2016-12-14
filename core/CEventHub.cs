@@ -23,6 +23,9 @@ namespace ns_artDesk.core
         public event System.Action<Key> evtGlobalKeyDown = null;
         public event System.Action<Key> evtGlobalKeyUp = null;
 
+        //public event System.Action<float, float> evtScreenMouseMove = null;
+        //public event System.Action leftKey  = null;
+
         internal void keydown(Key k)
         {
             evtKeyDown?.Invoke(k);
@@ -49,14 +52,13 @@ namespace ns_artDesk.core
         //public static event System.Action<double, double> evtRightMouseUp = null;
         //public static event System.Action<double, double> evtRightMouseDown = null;
         //public static event System.Action<double, double> evtRightMouseDrag = null;
-
         KeyboardListener listener = new KeyboardListener();
     }
 
     public class KeyboardListener : IDisposable
     {
         private static IntPtr hookId = IntPtr.Zero;
-        private static WindowsUtil.LowLevelKeyboardProc HookCallbackProc;
+        private static WindowsUtil.lowLevel.LowLevelKeyboardProc HookCallbackProc;
         [MethodImpl(MethodImplOptions.NoInlining)]
         private IntPtr HookCallback(
             int nCode, IntPtr wParam, IntPtr lParam)
@@ -69,7 +71,7 @@ namespace ns_artDesk.core
             {
                 Console.WriteLine("There was some error somewhere...");
             }
-            return WindowsUtil.CallNextHookEx(hookId, nCode, wParam, lParam);
+            return WindowsUtil.lowLevel.CallNextHookEx(hookId, nCode, wParam, lParam);
         }
 
         private IntPtr HookCallbackInner(int nCode, IntPtr wParam, IntPtr lParam)
@@ -77,26 +79,26 @@ namespace ns_artDesk.core
             Trace.WriteLine(nCode.ToString());
             if (nCode >= 0)
             {
-                if (wParam == (IntPtr)WindowsUtil.WM_KEYDOWN)
+                if (wParam == (IntPtr)WindowsUtil.lowLevel.WM_KEYDOWN)
                 {
                     int vkCode = Marshal.ReadInt32(lParam);
                     
                     var key = KeyInterop.KeyFromVirtualKey(vkCode);
                     CEventHub.Instance.globalKeydown(key);
                 }
-                else if (wParam == (IntPtr)WindowsUtil.WM_KEYUP)
+                else if (wParam == (IntPtr)WindowsUtil.lowLevel.WM_KEYUP)
                 {
                     int vkCode = Marshal.ReadInt32(lParam);
                     var key = KeyInterop.KeyFromVirtualKey(vkCode);
                     CEventHub.Instance.globalKeyup(key);
                 }
             }
-            return WindowsUtil.CallNextHookEx(hookId, nCode, wParam, lParam);
+            return WindowsUtil.lowLevel.CallNextHookEx(hookId, nCode, wParam, lParam);
         }
         
         public KeyboardListener()
         {
-            HookCallbackProc = (WindowsUtil.LowLevelKeyboardProc)HookCallback;
+            HookCallbackProc = (WindowsUtil.lowLevel.LowLevelKeyboardProc)HookCallback;
             hookId = InterceptKeys.SetHook(HookCallbackProc);
         }
 
@@ -109,7 +111,7 @@ namespace ns_artDesk.core
 
         public void Dispose()
         {
-            WindowsUtil.UnhookWindowsHookEx(hookId);
+            WindowsUtil.lowLevel.UnhookWindowsHookEx(hookId);
         }
 
         #endregion
@@ -117,13 +119,13 @@ namespace ns_artDesk.core
 
         internal static class InterceptKeys
         {
-            public static IntPtr SetHook(WindowsUtil.LowLevelKeyboardProc proc)
+            public static IntPtr SetHook(WindowsUtil.lowLevel.LowLevelKeyboardProc proc)
             {
                 using (Process curProcess = Process.GetCurrentProcess())
                 using (ProcessModule curModule = curProcess.MainModule)
                 {
-                    return WindowsUtil.SetWindowsHookEx(WindowsUtil.WH_KEYBOARD_LL, proc,
-                        WindowsUtil.GetModuleHandle(curModule.ModuleName), 0);
+                    return WindowsUtil.lowLevel.SetWindowsHookEx(WindowsUtil.lowLevel.WH_KEYBOARD_LL, proc,
+                        WindowsUtil.lowLevel.GetModuleHandle(curModule.ModuleName), 0);
                 }
             }
         }

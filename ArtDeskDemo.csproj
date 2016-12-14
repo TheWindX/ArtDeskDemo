@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Svg2Xaml, Version=0.2.5773.26975, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Xaml2Svg.0.2.3\lib\net40\Svg2Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -87,6 +91,10 @@
     <Compile Include="entity\Component\COMFolder.cs" />
     <Compile Include="entity\Component\COMListItem.cs" />
     <Compile Include="entity\Component\COMLister.cs" />
+    <Compile Include="entity\Logic\ArtAppList.cs" />
+    <Compile Include="entity\Logic\Config.cs" />
+    <Compile Include="entity\Logic\DesktopList.cs" />
+    <Compile Include="module\LogicModule.cs" />
     <Compile Include="view\widget\UIDesk.xaml.cs">
       <DependentUpon>UIDesk.xaml</DependentUpon>
     </Compile>
@@ -103,10 +111,9 @@
     <Compile Include="core\CFileDownloadController.cs" />
     <Compile Include="core\CFileLogger.cs" />
     <Compile Include="core\CLogger.cs" />
-    <Compile Include="core\CModule.cs" />
     <Compile Include="core\CRandom.cs" />
     <Compile Include="core\CDriver.cs" />
-    <Compile Include="core\CRuntime.cs" />
+    <Compile Include="core\CModule.cs" />
     <Compile Include="core\CTimeService.cs" />
     <Compile Include="core\Util\Singleton.cs" />
     <Compile Include="core\Util\ListEx.cs" />
@@ -143,6 +150,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -152,9 +160,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="entity\App\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

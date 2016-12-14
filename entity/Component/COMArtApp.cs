@@ -68,7 +68,6 @@ namespace ns_artDesk
         public void reload()
         {
             getComponent<COMArtApp>().reflushUI();
-            
         }
 
         public void invoke()

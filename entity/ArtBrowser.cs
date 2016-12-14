@@ -18,7 +18,7 @@ namespace ns_artDesk
             }
         }
 
-        public COMFolder mStore = null;
+        COMFolder mStore = null;
         public COMFolder store
         {
             get

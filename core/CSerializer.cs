@@ -1,4 +1,59 @@
-﻿using System;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: 对类进行序列化和反序列化
+ * 1. （反）序列化所有的属性成员
+ * 2. 需加上[SerializedProp]标签
+ * 3. 简单类型支持bool, int, double, string, 复合类型支持List<XXX>, 自定义类
+ * 4. List<int> 表示为 <xxxlist> <item value="1"/> <item value="1"/> <item value="1"/> </xxxlist>
+ * 例子如下
+<applist>
+    <apps>
+        <item path="/app_root/2d/photoshop_11">
+            <meta name="photoshop_11" version="12345" title="photoshop11" desc="descxxx" type="internal_standalone"/>
+        </item>
+        <item path="/app_root/2d/photoshop_12">
+            <meta name="photoshop_12" version="212345" title="photoshop12" desc="descxxx" type="internal_standalone"/>
+        </item>
+    </apps>
+    <numbers>
+        <item value="1">
+        <item value="2">
+        <item value="3">
+    </numbers>
+</applist>
+
+    public class CArtAppMeta
+    {
+        [SerializedProp]
+        public string name { get; set; }
+        [SerializedProp]
+        public double version { get; set; }
+        [SerializedProp]
+        public string title { get; set; }
+        [SerializedProp]
+        public string desc { get; set; }
+        [SerializedProp]
+        public string type { get; set; }
+    }
+
+    public class CArtApp
+    {
+        [SerializedProp]
+        public string path { get; set; }
+        [SerializedProp]
+        public CArtAppMeta meta { get; set; }
+    }
+
+
+    public class CArtAppList
+    {
+        [SerializedProp]
+        public List<CArtApp> apps { get; set; }
+        public List<int> numbers { get; set; }
+    }
+ * */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +67,7 @@ namespace ns_artDesk.core
 {
     class CSerializer : Singleton<CSerializer>
     {
-        public T fromSting<T>(string text) where T : class
+        public T fromXML<T>(string text) where T : class
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(text);
@@ -24,25 +79,32 @@ namespace ns_artDesk.core
             return fromXML(typeof(T), elem) as T;
         }
 
-        public object fromXML(Type t, XmlElement elem)
+        public void fromXML(ref object instance, string text)
         {
-            object instance = Activator.CreateInstance(t);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(text);
+            fromXML(ref instance, doc.DocumentElement);
+        }
 
+
+        public void fromXML(ref object instance, XmlElement elem)
+        {
+            var t = instance.GetType();
             if (t == typeof(bool))
             {
-                return Convert.ToBoolean(elem.GetAttribute("value"));
+                instance = Convert.ToBoolean(elem.GetAttribute("value"));
             }
             else if (t == typeof(int))
             {
-                return Convert.ToInt32(elem.GetAttribute("value"));
+                instance = Convert.ToInt32(elem.GetAttribute("value"));
             }
             else if (t == typeof(double))
             {
-                return Convert.ToInt32(elem.GetAttribute("value"));
+                instance = Convert.ToInt32(elem.GetAttribute("value"));
             }
             else if (t == typeof(string))
             {
-                return elem.GetAttribute("value");
+                instance = elem.GetAttribute("value");
             }
 
             var props = t.GetProperties();
@@ -106,6 +168,11 @@ namespace ns_artDesk.core
                     }
                 }
             }
+        }
+        public object fromXML(Type t, XmlElement elem)
+        {
+            object instance = Activator.CreateInstance(t);
+            fromXML(ref instance, elem);
             return instance;
         }
 
@@ -152,8 +219,11 @@ namespace ns_artDesk.core
             }
             else if (obj is string)
             {
+                var str = (obj as string);
+                if (str == null)
+                    str = "";
                 var e = doc.CreateElement(name);
-                e.SetAttribute("value", obj.ToString());
+                e.SetAttribute("value", str);
                 return e;
             }
             else if (obj is IList)
@@ -162,7 +232,7 @@ namespace ns_artDesk.core
                 var e = doc.CreateElement(name);
                 foreach (var sub in subs)
                 {
-                    var e1 = toXML("child", sub, doc);
+                    var e1 = toXML("item", sub, doc);
                     e.AppendChild(e1);
                 }
                 return e;
@@ -214,6 +284,4 @@ namespace ns_artDesk.core
     public class SerializedPropAttribute : System.Attribute
     {
     }
-
-
 }

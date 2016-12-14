@@ -21,7 +21,7 @@ namespace ns_artDesk.core
             var ts = CTimeService.Instance; //for instance construct
             var eh = CEventHub.Instance; //for instance construct
             CTimerManager.Init(() => (UInt32)ts.getTime());
-            CRuntime.Instance.init();
+            CModuleManager.Instance.init();
             CFileDownloadController.Instance.init();
         }
 
@@ -32,7 +32,7 @@ namespace ns_artDesk.core
             CTimeService.Instance.update();
             CTimerManager.tickAll();
             
-            CRuntime.Instance.update();
+            CModuleManager.Instance.update();
             CFileDownloadController.Instance.update();
 
         }
@@ -41,7 +41,7 @@ namespace ns_artDesk.core
         {
             ArtFrame.Instance.exit();
             ArtDesk.Instance.exit();
-            CRuntime.Instance.exit();
+            CModuleManager.Instance.exit();
             CFileDownloadController.Instance.exit();
         }
     }
