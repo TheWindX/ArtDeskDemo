@@ -23,6 +23,7 @@ namespace ns_artDesk.core
             CTimerManager.Init(() => (UInt32)ts.getTime());
             CModuleManager.Instance.init();
             CFileDownloadController.Instance.init();
+            CDispatcher.Instance.init();
         }
 
         public void update()
@@ -34,7 +35,7 @@ namespace ns_artDesk.core
             
             CModuleManager.Instance.update();
             CFileDownloadController.Instance.update();
-
+            CDispatcher.Instance.update();
         }
 
         public void exit()
@@ -43,6 +44,7 @@ namespace ns_artDesk.core
             ArtDesk.Instance.exit();
             CModuleManager.Instance.exit();
             CFileDownloadController.Instance.exit();
+            CDispatcher.Instance.exit();
         }
     }
 }

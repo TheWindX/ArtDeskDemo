@@ -48,5 +48,10 @@ namespace ns_artDesk.core
                 }
             }
         }
+
+        public void exit()
+        {
+
+        }
     }
 }
