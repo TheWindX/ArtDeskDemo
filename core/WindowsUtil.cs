@@ -79,7 +79,7 @@ namespace ns_artDesk.core
 
         #region system
         //最大硬盘目录
-        public static DirectoryInfo findMaxFreeSpaceDriver()
+        public static DirectoryInfo getMaxFreeSpaceDriverDir()
         {
             var drivers = System.IO.DriveInfo.GetDrives();
             DriveInfo maxSpaceDriver = null;
@@ -97,6 +97,44 @@ namespace ns_artDesk.core
                 }
             }
             return maxSpaceDriver.RootDirectory;
+        }
+
+        //当前应用目录
+        public static DirectoryInfo getExeDir()
+        {
+            string dir = Environment.CurrentDirectory + "/";
+            return new DirectoryInfo(dir);
+        }
+
+        public static string readTextFile(string path)
+        {
+            if(!File.Exists(path))
+            {
+                CLogger.Instance.error("loadTxtFile", "{0} doesn't exist", path);
+                throw new Exception("");
+            }
+            try
+            {
+                return File.ReadAllText(path);
+            }
+            catch(Exception ex)
+            {
+                CLogger.Instance.error("loadTxtFile", "{0} cannot read", path);
+                throw new Exception("");
+            }
+        }
+
+        public static void writeTextFile(string path, string content)
+        {
+            try
+            {
+                File.WriteAllText(path, content);
+            }
+            catch (Exception ex)
+            {
+                CLogger.Instance.error("writeTextFile", "{0} cannot read", path);
+                throw new Exception("");
+            }
         }
 
         #endregion

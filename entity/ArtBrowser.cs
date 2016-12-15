@@ -9,8 +9,8 @@ namespace ns_artDesk
 {
     class ArtBrowser : EntityBase
     {
-        COMFolder mRoot = null;
-        public COMFolder root
+        COMLister mRoot = null;
+        public COMLister root
         {
             get
             {
@@ -18,8 +18,8 @@ namespace ns_artDesk
             }
         }
 
-        COMFolder mStore = null;
-        public COMFolder store
+        COMStoreFolder mStore = null;
+        public COMStoreFolder store
         {
             get
             {
@@ -35,21 +35,15 @@ namespace ns_artDesk
                 return mDestop;
             }
         }
-
+        
         public ArtBrowser()
         {
-            COMObj obj = new COMObj() { name = "root" };
-            mRoot = obj.addComponent<COMFolder>().Last() as COMFolder;
+            mRoot = CComponent.instance<COMLister>();
+            mDestop = CComponent.instance<COMDesktop>();
+            mStore = CComponent.instance<COMStoreFolder>();
 
-            //增加app store
-            obj = new COMObj() { name = "store" };
-            mStore = obj.addComponent<COMFolder>().Last() as COMFolder;
-            mRoot.appItem(mStore.getComponent<COMListItem>());
-
-            //增加destop
-            obj = new COMObj() { name = "desktop" };
-            mDestop = obj.addComponent<COMDesktop>().Last() as COMDesktop;
-            mRoot.appItem(mDestop.getComponent<COMListItem>());
+            mRoot.items.pushBack(mDestop.getComponent<COMListItem>());
+            mRoot.items.pushBack(mStore.getComponent<COMListItem>());
         }
 
         public void reload()

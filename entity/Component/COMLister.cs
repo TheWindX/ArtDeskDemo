@@ -7,15 +7,31 @@ using System.Threading.Tasks;
 
 namespace ns_artDesk
 {
+    [RequireCom(typeof(COMListItem))]
+    [RequireCom(typeof(COMPanel))]
     class COMLister : CComponent
     {
-        ListEx<COMListItem> mItem = new ListEx<COMListItem>();
+        internal Func<ListEx<COMListItem>> doGetItem = null;
+
         public ListEx<COMListItem> items
         {
             get
             {
-                return mItem;
+                return doGetItem?.Invoke();
             }
+        }
+
+        ListEx<COMListItem> mItem = null;
+        public override void onAwake()
+        {
+            doGetItem = () =>
+            {
+                if(mItem == null)
+                {
+                    mItem = new ListEx<COMListItem>();
+                }
+                return mItem;
+            };
         }
     }
 }

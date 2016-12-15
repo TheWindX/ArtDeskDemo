@@ -73,6 +73,15 @@ namespace ns_artDesk.view.widget
                     mFrame.Background = unselectedBrush;
             }
         }
-        
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ClickCount == 2)
+            {
+                evtDoubleClick?.Invoke();
+            }
+        }
+
+        public event Action evtDoubleClick;
     }
 }

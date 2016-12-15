@@ -7,22 +7,19 @@ using System.Threading.Tasks;
 
 namespace ns_artDesk
 {
-    [RequireCom(typeof(COMLister))]
-    class COMFolder : CComponent
+    [RequireCom(typeof(COMFolder))]
+    class COMDesktop : CComponent
     {
-        public DesktopItem config { get; set; }
         public override void onAwake()
         {
             base.onAwake();
-            var ls = getComponent<COMLister>();
-            ls.doGetItem = () =>
+            var list = getComponent<COMLister>();
+            list.doGetItem = () =>
             {
                 ListEx<COMListItem> r = new ListEx<COMListItem>();
-                var fid = config.id;
-
-                foreach (var conf in DesktopList.Instance.items)
+                foreach(var conf in DesktopList.Instance.items)
                 {
-                    if (conf.folder_id == fid)
+                    if(conf.folder_id == DesktopItem.fold_id_top)
                     {
                         if (conf.type == DesktopItem.typeFolder)
                         {
@@ -45,7 +42,7 @@ namespace ns_artDesk
             icon.doGetUI = () =>
             {
                 var ui = icon.doGetUIBase();
-                ui.title = config.folder_name;
+                ui.title = "桌面";
                 return ui;
             };
         }

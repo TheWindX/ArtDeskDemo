@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="1280" WindowStyle="None" Loaded="Window_Loaded" Background="{x:Null}" Foreground="#00000000" AllowsTransparency="True" Initialized="Window_Initialized" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" ShowInTaskbar="False">
     <Canvas>
-        <view:UIDesk x:Name="mArtDesk">
+        <view:UIFolder x:Name="mArtDesk">
             
-        </view:UIDesk>
+        </view:UIFolder>
     </Canvas>
 </Window>

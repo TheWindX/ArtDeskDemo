@@ -53,11 +53,11 @@ namespace ns_artDesk
             CLogger.Instance.info("ArtDesk", "set wallpaper at path {0}", path);
             if(File.Exists(path) )
             {
-                (getUI() as UIDesk).Background = new ImageBrush(new BitmapImage(new Uri(path)));
+                var t = (getUI() as UIFolder).Background = new ImageBrush(new BitmapImage(new Uri(path)));
             }
             else
             {
-                (getUI() as UIDesk).Background = new SolidColorBrush(Colors.Black);
+                (getUI() as UIFolder).Background = new SolidColorBrush(Colors.Black);
             }
         }
 

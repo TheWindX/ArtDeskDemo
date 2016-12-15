@@ -10,7 +10,7 @@ namespace ns_artDesk
 {
     class Config : Singleton<Config>
     {
-        const string path = "config.xml";
+        const string file = "config.xml";
         const string workSpaceDir = "WS";
 
         [SerializedProp]
@@ -21,13 +21,12 @@ namespace ns_artDesk
 
         public Config()
         {
-            reload();
+            load();
         }
 
-        void reload()
+        void load()
         {
-            string curDir = Environment.CurrentDirectory;
-            string filePath = curDir +"/"+ path;
+            string filePath = WindowsUtil.getExeDir() + file;
             var fi = new FileInfo(filePath);
             if (!fi.Exists)
             {
@@ -35,24 +34,22 @@ namespace ns_artDesk
                 var fs = File.Create(filePath);
                 fs.Close();
                 //在最大分区创建工作目录
-                var di = WindowsUtil.findMaxFreeSpaceDriver();
+                var di = WindowsUtil.getMaxFreeSpaceDriverDir();
                 di = new DirectoryInfo(di + workSpaceDir);
                 if (!di.Exists)
                 {
                     di.Create();
                 }
-                work_space_dir = di.FullName;
+                work_space_dir = di.FullName + "/";
                 var content = CSerializer.Instance.toXML(this);
                 File.WriteAllText(fi.FullName, content);
             }
             else
             {
-                var content = File.ReadAllText(fi.FullName);
+                var content = WindowsUtil.readTextFile(fi.FullName);
                 object instance = this;
                 CSerializer.Instance.fromXML(ref instance, content);
             }
         }
     }
-
-
 }

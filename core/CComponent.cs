@@ -39,8 +39,17 @@ namespace ns_artDesk.core
             var c = (CComponent)Activator.CreateInstance(t);
             c.mObj = this;
             this.mComponents.Add(c);
+            c.onAwake();
             coms.Add(c);
-            return coms;
+
+            List<CComponent> coms1 = new List<CComponent>();
+            foreach(var com in coms1)
+            {
+                if (coms1.Contains(com)) continue;
+                coms1.Add(com);
+            }
+
+            return coms1;
         }
 
         public IEnumerable<CComponent> addComponent<T>() where T : CComponent
@@ -113,6 +122,18 @@ namespace ns_artDesk.core
             {
                 return mObj;
             }
+        }
+
+        public virtual void onAwake()
+        {
+
+        }
+
+        public static T instance<T>() where T:CComponent
+        {
+            var obj = new COMObj();
+            obj.addComponent<T>();
+            return obj.getComponent<T>();
         }
 
         public IEnumerable<CComponent> addComponent<T>() where T : CComponent

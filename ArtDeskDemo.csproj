@@ -59,7 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="view\widget\UIDesk.xaml">
+    <Page Include="view\widget\UIFolder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,19 +84,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="core\CDispatcher.cs" />
     <Compile Include="core\CSerializer.cs" />
     <Compile Include="entity\ArtBrowser.cs" />
-    <Compile Include="entity\Component\COMAPPStore.cs" />
-    <Compile Include="entity\Component\COMDestop.cs" />
+    <Compile Include="entity\Component\COMDesktop.cs" />
     <Compile Include="entity\Component\COMFolder.cs" />
+    <Compile Include="entity\Component\COMIcon.cs" />
     <Compile Include="entity\Component\COMListItem.cs" />
     <Compile Include="entity\Component\COMLister.cs" />
-    <Compile Include="entity\Logic\ArtAppList.cs" />
-    <Compile Include="entity\Logic\Config.cs" />
-    <Compile Include="entity\Logic\DesktopList.cs" />
+    <Compile Include="entity\Component\COMPanel.cs" />
+    <Compile Include="entity\Component\COMStoreFolder.cs" />
+    <Compile Include="entity\Component\COMStoreTag.cs" />
+    <Compile Include="entity\Component\COMRoot.cs" />
+    <Compile Include="entity\configs\ArtAppList.cs" />
+    <Compile Include="entity\configs\Config.cs" />
+    <Compile Include="entity\configs\DesktopList.cs" />
     <Compile Include="module\LogicModule.cs" />
-    <Compile Include="view\widget\UIDesk.xaml.cs">
-      <DependentUpon>UIDesk.xaml</DependentUpon>
+    <Compile Include="view\widget\UIFolder.xaml.cs">
+      <DependentUpon>UIFolder.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\widget\UIIcon.xaml.cs">
       <DependentUpon>UIIcon.xaml</DependentUpon>
@@ -118,7 +123,7 @@
     <Compile Include="core\Util\Singleton.cs" />
     <Compile Include="core\Util\ListEx.cs" />
     <Compile Include="core\WindowsUtil.cs" />
-    <Compile Include="entity\Component\COMArtApp.cs" />
+    <Compile Include="entity\Component\COMAppItem.cs" />
     <Compile Include="entity\ArtStore.cs" />
     <Compile Include="entity\ArtDesk.cs" />
     <Compile Include="entity\ArtUI.cs" />
@@ -160,7 +165,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
