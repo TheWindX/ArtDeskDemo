@@ -266,7 +266,9 @@ namespace ns_artDesk.core
                 else if (prop.PropertyType == typeof(string))
                 {
                     var p = doc.CreateAttribute(prop.Name);
-                    p.Value = prop.GetValue(obj).ToString();
+                    var str = prop.GetValue(obj);
+                    if (str == null) str = "";
+                    p.Value = str.ToString();
                     elem.Attributes.Append(p);
                 }
                 else
