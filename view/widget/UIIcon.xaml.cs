@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Svg2Xaml;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,25 +26,30 @@ namespace ns_artDesk.view.widget
         public UIIcon()
         {
             InitializeComponent();
-            choosed = true;
-        }
-
-        public Brush BG
-        {
-            get
-            {
-                return mIcon.Background;
-            }
-            set
-            {
-                mIcon.Background = value;
+            choosed = false;
+            var path = "resource/app.svg";
+            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {  
+                mIcon.Source = SvgReader.Load(stream);
             }
         }
 
-        public void setBGIMG(string localUrl)
-        {
-            BG = new ImageBrush(new BitmapImage(new Uri(localUrl)));
-        }
+        //public Brush BG
+        //{
+        //    get
+        //    {
+        //        return mIcon.Background;
+        //    }
+        //    set
+        //    {
+        //        mIcon.Background = value;
+        //    }
+        //}
+
+        //public void setBGIMG(string localUrl)
+        //{
+        //    BG = new ImageBrush(new BitmapImage(new Uri(localUrl)));
+        //}
 
         public string title
         {

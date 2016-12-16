@@ -82,8 +82,15 @@ namespace ns_artDesk.core
         public void fromXML(ref object instance, string text)
         {
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(text);
-            fromXML(ref instance, doc.DocumentElement);
+            try
+            {
+                doc.LoadXml(text);
+                fromXML(ref instance, doc.DocumentElement);
+            }
+            catch(XmlException ex)
+            {
+                CLogger.Instance.error("CSerializer", ex.ToString());
+            }
         }
 
 
@@ -146,32 +153,56 @@ namespace ns_artDesk.core
                         var ts = prop.PropertyType.GetGenericArguments();
                         var constructedListType = listType.MakeGenericType(ts);
                         var ins = Activator.CreateInstance(constructedListType);
-                        foreach (XmlElement childElement in ls[0].ChildNodes)
+                        foreach (XmlNode childNode in ls[0].ChildNodes)
                         {
-                            var obj = fromXML(ts[0], childElement);
-                            var objList = (ins as IList);
-                            objList.Insert(objList.Count, obj);
+                            if (childNode is XmlElement)
+                            {
+                                var childElement = childNode as XmlElement;
+                                var obj = fromXML(ts[0], childElement);
+                                var objList = (ins as IList);
+                                objList.Insert(objList.Count, obj);
+                            }
                         }
                         prop.SetValue(instance, ins);
                     }
                 }
                 else
                 {
-                    foreach (XmlElement childElement in elem.ChildNodes)
+                    foreach (XmlNode childNode in elem.ChildNodes)
                     {
-                        if (childElement.Name == prop.Name)
+                        if(childNode is XmlElement)
                         {
-                            var obj = fromXML(prop.PropertyType, childElement);
-                            prop.SetValue(instance, obj);
-                            break;
+                            var childElement = childNode as XmlElement;
+                            if (childElement.Name == prop.Name)
+                            {
+                                var obj = fromXML(prop.PropertyType, childElement);
+                                prop.SetValue(instance, obj);
+                                break;
+                            }
                         }
+                        
                     }
                 }
             }
         }
         public object fromXML(Type t, XmlElement elem)
         {
-            object instance = Activator.CreateInstance(t);
+            object instance = null;
+            if (t == typeof(string))
+            {
+                instance = "";
+            }
+            else
+            {
+                try
+                {
+                    instance = Activator.CreateInstance(t);
+                }
+                catch(Exception ex)
+                {
+                    CLogger.Instance.error("CSerializer",  ex.ToString());
+                }
+            }
             fromXML(ref instance, elem);
             return instance;
         }

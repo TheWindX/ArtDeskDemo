@@ -34,7 +34,7 @@ namespace ns_artDesk
         public List<DesktopItem> items { get; set; }
 
         //取得配置文件
-        void load()
+        internal void load()
         {
             var fpath = WindowsUtil.getExeDir() + file;
             var content = WindowsUtil.readTextFile(fpath);
@@ -42,7 +42,7 @@ namespace ns_artDesk
             CSerializer.Instance.fromXML(ref instance, content);
         }
 
-        void save()
+        internal void save()
         {
             var fpath = WindowsUtil.getExeDir() + file;
             var content = CSerializer.Instance.toXML(this);

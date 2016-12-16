@@ -165,6 +165,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\APP.svg" />
+    <Resource Include="resource\file-directory.svg" />
+    <Resource Include="resource\ps.svg" />
+    <Resource Include="resource\report-max.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

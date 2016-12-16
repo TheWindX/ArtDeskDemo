@@ -52,7 +52,7 @@ namespace ns_artDesk.core
         //public static event System.Action<double, double> evtRightMouseUp = null;
         //public static event System.Action<double, double> evtRightMouseDown = null;
         //public static event System.Action<double, double> evtRightMouseDrag = null;
-        KeyboardListener listener = new KeyboardListener();
+        //KeyboardListener listener = new KeyboardListener();
     }
 
     public class KeyboardListener : IDisposable
@@ -67,16 +67,16 @@ namespace ns_artDesk.core
             {
                 return HookCallbackInner(nCode, wParam, lParam);
             }
-            catch
+            catch(Exception ex)
             {
-                Console.WriteLine("There was some error somewhere...");
+                CLogger.Instance.error("CEventHub", ex.ToString());
             }
             return WindowsUtil.lowLevel.CallNextHookEx(hookId, nCode, wParam, lParam);
         }
 
         private IntPtr HookCallbackInner(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            Trace.WriteLine(nCode.ToString());
+            CLogger.Instance.info("CEventHub", "receive keyboard code of:{1}", nCode);
             if (nCode >= 0)
             {
                 if (wParam == (IntPtr)WindowsUtil.lowLevel.WM_KEYDOWN)

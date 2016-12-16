@@ -1,0 +1,23 @@
+<root>
+	<apps>
+		1<item path="xxx/yyy1">
+			<meta name="3dsmax2011" version="2016121601" title="3dsmax2011" desc="建模工具" type="external_installation">
+				<tags>
+					<item value="3D"/>
+					<item value="美术"/>
+					<item value="建模必备"/>
+				</tags>
+			</meta>
+		</item>
+		
+		<item path="xxx/yyy2">
+			<meta name="3dsmax2012" version="2016121602" title="3dsmax2012" desc="建模工具" type="external_installation">
+				<tags>
+					<item value="3D"/>
+					<item value="美术"/>
+					<item value="建模必备"/>
+				</tags>
+			</meta>
+		</item>
+	</apps>
+</root>

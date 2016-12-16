@@ -18,13 +18,8 @@ namespace ns_artDesk
 
         [SerializedProp]
         public string http_server { get; set; }
-
-        public Config()
-        {
-            load();
-        }
-
-        void load()
+        
+        internal void load()
         {
             string filePath = WindowsUtil.getExeDir() + file;
             var fi = new FileInfo(filePath);

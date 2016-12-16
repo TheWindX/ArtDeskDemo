@@ -20,13 +20,13 @@ namespace ns_artDesk.core
         {
             if(fileWriter == null)
             {
-                fileWriter = File.AppendText(outputPath);
+                fileWriter = File.CreateText(outputPath);
             }
         }
         public void error(string tag, string strFormat, params object[] values)
         {
             var strDT = CTimeService.Instance.formattedDateTime();
-            var content = string.Format("error:\t{0}\t{1}", tag, strFormat, string.Format(strFormat, values));
+            var content = string.Format("error:\t{0}\t{1}\t{2}", strDT, tag, string.Format(strFormat, values));
             fileWriter.WriteLine(content);
             fileWriter.Flush();
         }
@@ -34,7 +34,7 @@ namespace ns_artDesk.core
         public void info(string tag, string strFormat, params object[] values)
         {
             var strDT = CTimeService.Instance.formattedDateTime();
-            var content = string.Format("info:\t{0}\t{1}", tag, strFormat, string.Format(strFormat, values));
+            var content = string.Format("info:\t{0}\t{1}\t{2}", strDT, tag, string.Format(strFormat, values));
             fileWriter.WriteLine(content);
             fileWriter.Flush();
         }

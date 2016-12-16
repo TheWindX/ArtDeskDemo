@@ -10,7 +10,19 @@ namespace ns_artDesk
     [RequireCom(typeof(COMLister))]
     class COMStoreTag : CComponent
     {
-        public string tag { get; set; }
+        public string mTag = "";
+        public string tag
+        {
+            get
+            {
+                return mTag;
+            }
+            set
+            {
+                mTag = value;
+                getComponent<COMIcon>().getUI().title = mTag;
+            }
+        }
         public override void onAwake()
         {
             base.onAwake();
@@ -23,6 +35,7 @@ namespace ns_artDesk
                 {
                     var appItem = instance<COMAppItem>();
                     appItem.app_config = cfg;
+                    items.pushBack(appItem.getComponent<COMListItem>());
                 }
 
                 return items;

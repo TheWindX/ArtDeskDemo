@@ -21,6 +21,9 @@ namespace ns_artDesk
                 }
                 return items;
             };
+
+            var icon = getComponent<COMIcon>();
+            icon.getUI().title = "应用号";
         }
     }
 }

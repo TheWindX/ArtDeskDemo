@@ -42,7 +42,7 @@ namespace ns_artDesk
         public List<CArtApp> apps { get; set; }
 
         //取得配置文件
-        void load()
+        internal void load()
         {
             string fpath = WindowsUtil.getExeDir() + file;
             var content = WindowsUtil.readTextFile(fpath);

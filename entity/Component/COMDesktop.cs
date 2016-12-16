@@ -17,6 +17,7 @@ namespace ns_artDesk
             list.doGetItem = () =>
             {
                 ListEx<COMListItem> r = new ListEx<COMListItem>();
+                r.pushBack(ArtBrowser.Instance.store.getComponent<COMListItem>());
                 foreach(var conf in DesktopList.Instance.items)
                 {
                     if(conf.folder_id == DesktopItem.fold_id_top)

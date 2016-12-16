@@ -1,0 +1,10 @@
+<root>
+	<items>
+		<item id="1" type="folder" app_id="" folder_name="tmp" folder_id="">
+		</item>
+		<item id="2" type="app" app_id="3dsmax2011" folder_name="" folder_id="">
+		</item>
+		<item id="3" type="app" app_id="3dsmax2012" folder_name="" folder_id="tmp">
+		</item>
+	</items>
+</root>

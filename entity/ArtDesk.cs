@@ -34,9 +34,10 @@ namespace ns_artDesk
         {
             var w = System.Windows.SystemParameters.WorkArea.Width;
             var h = System.Windows.SystemParameters.WorkArea.Height;
-            getUI().Width = SystemParameters.PrimaryScreenWidth;
-            getUI().Height = SystemParameters.PrimaryScreenHeight;
-            Trace.WriteLine("FullPrimaryScreenHeight: " + SystemParameters.FullPrimaryScreenHeight);
+            getUI().Width = w;
+            getUI().Height = h;
+            CLogger.Instance.info("ArtDesk", "construct ArtDesk of width:{0}, height:{1}", w, h);
+            //Trace.WriteLine("FullPrimaryScreenHeight: " + SystemParameters.FullPrimaryScreenHeight);
             x = 0;
             y = 0;
             syncWallPaper();
@@ -44,20 +45,22 @@ namespace ns_artDesk
 
         public override FrameworkElement getUI()
         {
-            return ArtFrame.Instance.getMainWindow().mArtDesk;
+            return ArtFrame.Instance.getMainWindow().mFrame;
         }
 
         public void syncWallPaper()
         {
             string path = (string)Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop").GetValue("WallPaper");
-            CLogger.Instance.info("ArtDesk", "set wallpaper at path {0}", path);
-            if(File.Exists(path) )
+            if (path == null) path = "";
+            if (File.Exists(path) )
             {
-                var t = (getUI() as UIFolder).Background = new ImageBrush(new BitmapImage(new Uri(path)));
+                CLogger.Instance.info("ArtDesk", "try to set wallpaper at path {0}", path);
+                var t = (getUI() as Grid).Background = new ImageBrush(new BitmapImage(new Uri(path)));
             }
             else
             {
-                (getUI() as UIFolder).Background = new SolidColorBrush(Colors.Black);
+                CLogger.Instance.info("ArtDesk", "wallpaper of {0} doesn't exist, set background black", path);
+                (getUI() as Grid).Background = new SolidColorBrush(Colors.Black);
             }
         }
 
@@ -92,6 +95,4 @@ namespace ns_artDesk
             setAction(mFadeOut);
         }
     }
-
-    
 }

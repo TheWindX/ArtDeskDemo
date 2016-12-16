@@ -17,7 +17,20 @@ namespace ns_artDesk
 
         public void onInit()
         {
-            var config = Config.Instance;
+            //1. 加载配置
+            CLogger.Instance.info("LogicModule", "config.xml is loading");
+            Config.Instance.load();
+            CLogger.Instance.info("LogicModule", "config.xml is loaded");
+            CLogger.Instance.info("LogicModule", "app_list.xml is loading");
+            CArtAppList.Instance.load();
+            CLogger.Instance.info("LogicModule", "app_list.xml is loaded");
+            CLogger.Instance.info("LogicModule", "desktop_list.xml is loading");
+            DesktopList.Instance.load();
+            CLogger.Instance.info("LogicModule", "desktop_list.xml is loaded");
+
+            //2生成browser
+            //3desktop 定位到 mainwindow.uidesk
+            ArtBrowser.Instance.setDesktop();
         }
 
         public void onUpdate()

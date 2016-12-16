@@ -47,8 +47,6 @@ namespace ns_artDesk
                 mState = EState.succeed;
             }
             var r = (double)mTimeCount / mTime;
-            Trace.WriteLine("r: " + r.ToString());
-            Trace.WriteLine("opacity1: " + mTargetAlpha * r + mSourceAlpha * (1 - r));
             mUI.opacity = mTargetAlpha * r + mSourceAlpha * (1 - r);
         }
 

@@ -33,5 +33,18 @@ namespace ns_artDesk
         {
             return doGetUI();
         }
+
+        public void setDesktop()
+        {
+            ArtFrame.Instance.getMainWindow().mFrame.Children.Clear();
+            var ui = getUI();
+            ArtFrame.Instance.getMainWindow().mFrame.Children.Add(ui);
+            var items = getComponent<COMLister>().items;
+            foreach(var item in items)
+            {
+                var icon = item.getComponent<COMIcon>().getUI();
+                ui.mDesk.Children.Add(icon);
+            }
+        }
     }
 }

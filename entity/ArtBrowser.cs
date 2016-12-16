@@ -9,6 +9,14 @@ namespace ns_artDesk
 {
     class ArtBrowser : EntityBase
     {
+        public static ArtBrowser Instance
+        {
+            get
+            {
+                return Singleton<ArtBrowser>.Instance;
+            }
+        }
+
         COMLister mRoot = null;
         public COMLister root
         {
@@ -39,16 +47,17 @@ namespace ns_artDesk
         public ArtBrowser()
         {
             mRoot = CComponent.instance<COMLister>();
-            mDestop = CComponent.instance<COMDesktop>();
             mStore = CComponent.instance<COMStoreFolder>();
+            mDestop = CComponent.instance<COMDesktop>();
 
             mRoot.items.pushBack(mDestop.getComponent<COMListItem>());
             mRoot.items.pushBack(mStore.getComponent<COMListItem>());
         }
 
-        public void reload()
+        public void setDesktop()
         {
-
+            var panel = mDestop.getComponent<COMPanel>();
+            panel.setDesktop();
         }
     }
 }
