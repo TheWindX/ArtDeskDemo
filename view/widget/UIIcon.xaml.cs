@@ -33,24 +33,7 @@ namespace ns_artDesk.view.widget
                 mIcon.Source = SvgReader.Load(stream);
             }
         }
-
-        //public Brush BG
-        //{
-        //    get
-        //    {
-        //        return mIcon.Background;
-        //    }
-        //    set
-        //    {
-        //        mIcon.Background = value;
-        //    }
-        //}
-
-        //public void setBGIMG(string localUrl)
-        //{
-        //    BG = new ImageBrush(new BitmapImage(new Uri(localUrl)));
-        //}
-
+        
         public string title
         {
             get
