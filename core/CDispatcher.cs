@@ -2,7 +2,7 @@
  * author: xiaofeng.li
  * mail: 453588006@qq.com
  * desc: 其它线程向主线程投递任务
- * CDispatcher.Instance.post(() => { <some action from other thread> })
+ * usage: CDispatcher.Instance.post(() => { <some action from other thread> })
  */
 using System;
 using System.Collections.Generic;
@@ -43,7 +43,7 @@ namespace ns_artDesk.core
                     }
                     catch(Exception ex)
                     {
-                        CLogger.Instance.error("CDispatcher", ex.Message);
+                        CLogger.Instance.error("CDispatcher", ex.ToString());
                     }
                 }
             }

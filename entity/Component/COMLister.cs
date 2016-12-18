@@ -1,14 +1,5 @@
 ﻿using ns_artDesk.core;
-using Svg2Xaml;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
-using System.Xml;
 
 namespace ns_artDesk
 {
@@ -22,8 +13,14 @@ namespace ns_artDesk
         {
             get
             {
-                return doGetItem?.Invoke();
+                mItem = doGetItem?.Invoke();
+                return mItem;
             }
+        }
+
+        public ListEx<COMListItem> currentItems()
+        {
+            return mItem;
         }
 
         ListEx<COMListItem> mItem = null;
@@ -31,7 +28,7 @@ namespace ns_artDesk
         {
             doGetItem = () =>
             {
-                if(mItem == null)
+                if (mItem == null)
                 {
                     mItem = new ListEx<COMListItem>();
                 }
@@ -39,17 +36,12 @@ namespace ns_artDesk
             };
 
             var ui = getComponent<COMIcon>().getUI().mIcon;
-            var img = new ImageBrush();
-            var path = "resource/Folder.svg";
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                ui.Source = SvgReader.Load(stream);
-            }
+            ui.Source = IconManager.Instance.folderIcon;
 
             getComponent<COMIcon>().getUI().evtDoubleClick += () =>
-             {
-                 getComponent<COMPanel>().setDesktop();
-             };
+            {
+                getComponent<COMPanel>().setDesktop();
+            };
         }
     }
 }

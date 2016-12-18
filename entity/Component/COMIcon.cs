@@ -31,7 +31,13 @@ namespace ns_artDesk
 
         public UIIcon getUI()
         {
-            return doGetUI();
+            mIcon = doGetUI();
+            return mIcon;
+        }
+
+        public UIIcon currentUI()
+        {
+            return mIcon;
         }
 
         internal Action doEvtDoubleClick = null;

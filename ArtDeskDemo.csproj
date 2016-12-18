@@ -99,6 +99,7 @@
     <Compile Include="entity\configs\ArtAppList.cs" />
     <Compile Include="entity\configs\Config.cs" />
     <Compile Include="entity\configs\DesktopList.cs" />
+    <Compile Include="module\IconManager.cs" />
     <Compile Include="module\LogicModule.cs" />
     <Compile Include="view\widget\UIFolder.xaml.cs">
       <DependentUpon>UIFolder.xaml</DependentUpon>

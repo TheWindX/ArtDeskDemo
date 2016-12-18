@@ -16,14 +16,14 @@ namespace ns_artDesk.core
         public void error(string tag, string strFormat, params object[] values)
         {
             var strDT = CTimeService.Instance.formattedDateTime();
-            var content = string.Format("{0}\terr\t{1}\t{2}", strDT, tag, strFormat, string.Format(strFormat, values));
+            var content = string.Format("ERROR:\t{0}\t{1}\t{2}", strDT, tag, string.Format(strFormat, values));
             Console.WriteLine(content);
         }
 
         public  void info(string tag, string strFormat, params object[] values)
         {
             var strDT = CTimeService.Instance.formattedDateTime();
-            var content = string.Format("{0}\tinfo\t{1}\t{2}", strDT, tag, strFormat, string.Format(strFormat, values));
+            var content = string.Format("INFO:\t{0}\t{1}\t{2}", strDT, tag, string.Format(strFormat, values));
             Console.WriteLine(content);
         }
     }

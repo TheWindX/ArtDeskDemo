@@ -43,6 +43,7 @@ namespace ns_artDesk
             foreach(var item in items)
             {
                 var icon = item.getComponent<COMIcon>().getUI();
+                icon.lister = getComponent<COMLister>();
                 ui.mDesk.Children.Add(icon);
             }
         }

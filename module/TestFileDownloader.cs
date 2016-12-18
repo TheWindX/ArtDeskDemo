@@ -23,7 +23,7 @@ namespace ns_artDesk.module
 
         private void Instance_evtGlobalKeyUp(System.Windows.Input.Key k)
         {
-            Trace.WriteLine(k.ToString());
+            //Trace.WriteLine(k.ToString());
             if (k == System.Windows.Input.Key.Left)
             {
                 CFileDownloadController.Instance.Download(
@@ -41,15 +41,15 @@ namespace ns_artDesk.module
 
         private void DownloadProgressChanged(CFileDownloader downloader)
         {
-            Trace.WriteLine(string.Format("DownloadProgressChanged {0} {1}:{2}  {3}",
-                downloader.FilePath, downloader.BytesReceived,
-                downloader.TotalBytesToReceive, downloader.ProgressPercent));
+            //Trace.WriteLine(string.Format("DownloadProgressChanged {0} {1}:{2}  {3}",
+            //    downloader.FilePath, downloader.BytesReceived,
+            //    downloader.TotalBytesToReceive, downloader.ProgressPercent));
         }
 
         private void DownloadCompleted(CFileDownloader downloader)
         {
-            Trace.WriteLine(string.Format("DownloadProgressChanged {0} {1}",
-                downloader.FilePath, downloader.State.ToString()));
+            //Trace.WriteLine(string.Format("DownloadProgressChanged {0} {1}",
+            //    downloader.FilePath, downloader.State.ToString()));
         }
     }
 }

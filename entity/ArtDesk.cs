@@ -6,17 +6,11 @@
 using Microsoft.Win32;
 using ns_artDesk.core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows;
-using System.Diagnostics;
 using System.IO;
-using ns_artDesk.view.widget;
 
 namespace ns_artDesk
 {
@@ -32,12 +26,11 @@ namespace ns_artDesk
 
         public ArtDesk()
         {
-            var w = System.Windows.SystemParameters.WorkArea.Width;
-            var h = System.Windows.SystemParameters.WorkArea.Height;
+            var w = SystemParameters.WorkArea.Width;
+            var h = SystemParameters.WorkArea.Height;
             getUI().Width = w;
             getUI().Height = h;
             CLogger.Instance.info("ArtDesk", "construct ArtDesk of width:{0}, height:{1}", w, h);
-            //Trace.WriteLine("FullPrimaryScreenHeight: " + SystemParameters.FullPrimaryScreenHeight);
             x = 0;
             y = 0;
             syncWallPaper();

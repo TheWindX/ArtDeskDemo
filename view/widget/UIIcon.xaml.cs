@@ -27,11 +27,7 @@ namespace ns_artDesk.view.widget
         {
             InitializeComponent();
             choosed = false;
-            var path = "resource/app.svg";
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {  
-                mIcon.Source = SvgReader.Load(stream);
-            }
+            mIcon.Source = IconManager.Instance.appIcon;
         }
         
         public string title
@@ -46,9 +42,15 @@ namespace ns_artDesk.view.widget
             }
         }
 
+        internal COMLister lister
+        {
+            get; set;
+        }
+
         bool mChoosed = false;
-        Brush selectedBrush = new SolidColorBrush(Color.FromArgb(30, 0, 0, 255));
-        Brush unselectedBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 255));
+        Brush enterBrush = new SolidColorBrush(Color.FromArgb(30, 255, 255, 255));
+        Brush selectedBrush = new SolidColorBrush(Color.FromArgb(80, 255, 255, 255));
+        Brush unselectedBrush = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
         public bool choosed
         {
             get
@@ -59,7 +61,18 @@ namespace ns_artDesk.view.widget
             {
                 mChoosed = value;
                 if (value)
+                {
                     mFrame.Background = selectedBrush;
+                    
+                    var uis = lister.currentItems().Select(item => item.getComponent<COMIcon>().currentUI());
+                    foreach (var ui in uis)
+                    {
+                        if (ui != this)
+                        {
+                            ui.choosed = false;
+                        }
+                    }
+                }
                 else
                     mFrame.Background = unselectedBrush;
             }
@@ -74,5 +87,22 @@ namespace ns_artDesk.view.widget
         }
 
         public event Action evtDoubleClick;
+
+        private void OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            if(!choosed)
+                mFrame.Background = enterBrush;
+        }
+
+        private void OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!choosed)
+                mFrame.Background = unselectedBrush;
+        }
+
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            choosed = true;
+        }
     }
 }

@@ -36,12 +36,12 @@ namespace ns_artDesk
 
         private void mButtonFun_Click(object sender, RoutedEventArgs e)
         {
-            ArtDesk.Instance.MoveOut();
+            ArtDesk.Instance.FadeIn();
         }
 
         private void mButtonArt_Click(object sender, RoutedEventArgs e)
         {
-            ArtDesk.Instance.MoveIn();
+            ArtDesk.Instance.FadeOut();
         }
     }
 }

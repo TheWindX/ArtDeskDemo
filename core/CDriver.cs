@@ -16,14 +16,16 @@ namespace ns_artDesk.core
         List<EntityBase> mEntity = new List<EntityBase>();
         public void init()
         {
-            ArtFrame.Instance.init();
-            ArtDesk.Instance.init();
             var ts = CTimeService.Instance; //for instance construct
             var eh = CEventHub.Instance; //for instance construct
             CTimerManager.Init(() => (UInt32)ts.getTime());
             CModuleManager.Instance.init();
             CFileDownloadController.Instance.init();
             CDispatcher.Instance.init();
+
+            //UI is the last to init
+            ArtFrame.Instance.init();
+            ArtDesk.Instance.init();
         }
 
         public void update()

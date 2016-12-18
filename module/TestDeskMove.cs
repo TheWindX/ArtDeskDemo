@@ -29,7 +29,6 @@ namespace ns_artDesk
 
         private void Instance_evtGlobalKeyUp(System.Windows.Input.Key k)
         {
-            Trace.WriteLine(k.ToString());
             if(k == System.Windows.Input.Key.D0)
             {
                 ArtFrame.Instance.quit();
