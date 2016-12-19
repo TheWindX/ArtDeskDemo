@@ -67,11 +67,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="view\window\BrowserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\window\ControlWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="view\window\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -86,6 +90,7 @@
     </Compile>
     <Compile Include="core\CDispatcher.cs" />
     <Compile Include="core\CSerializer.cs" />
+    <Compile Include="core\Util\FileSystemUtil.cs" />
     <Compile Include="entity\ArtBrowser.cs" />
     <Compile Include="entity\Component\COMDesktop.cs" />
     <Compile Include="entity\Component\COMFolder.cs" />
@@ -96,9 +101,11 @@
     <Compile Include="entity\Component\COMStoreFolder.cs" />
     <Compile Include="entity\Component\COMStoreTag.cs" />
     <Compile Include="entity\Component\COMRoot.cs" />
+    <Compile Include="entity\Component\COMUpward.cs" />
     <Compile Include="entity\configs\ArtAppList.cs" />
     <Compile Include="entity\configs\Config.cs" />
     <Compile Include="entity\configs\DesktopList.cs" />
+    <Compile Include="module\AppStatModule.cs" />
     <Compile Include="module\IconManager.cs" />
     <Compile Include="module\LogicModule.cs" />
     <Compile Include="view\widget\UIFolder.xaml.cs">
@@ -106,6 +113,9 @@
     </Compile>
     <Compile Include="view\widget\UIIcon.xaml.cs">
       <DependentUpon>UIIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\window\BrowserWindow.xaml.cs">
+      <DependentUpon>BrowserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\window\ControlWindow.xaml.cs">
       <DependentUpon>ControlWindow.xaml</DependentUpon>
@@ -129,7 +139,7 @@
     <Compile Include="entity\ArtDesk.cs" />
     <Compile Include="entity\ArtUI.cs" />
     <Compile Include="entity\EntityBase.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="view\window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -167,10 +177,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\APP.svg" />
-    <Resource Include="resource\file-directory.svg" />
-    <Resource Include="resource\ps.svg" />
-    <Resource Include="resource\report-max.svg" />
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="resource\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

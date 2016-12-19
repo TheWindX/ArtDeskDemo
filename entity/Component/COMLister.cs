@@ -40,7 +40,7 @@ namespace ns_artDesk
 
             getComponent<COMIcon>().getUI().evtDoubleClick += () =>
             {
-                getComponent<COMPanel>().setDesktop();
+                ArtBrowser.Instance.accessInto(this);
             };
         }
     }

@@ -120,7 +120,7 @@ namespace ns_artDesk.core
             catch(Exception ex)
             {
                 CLogger.Instance.error("loadTxtFile", "{0} cannot read", path);
-                throw new Exception("");
+                throw ex;
             }
         }
 
@@ -133,7 +133,7 @@ namespace ns_artDesk.core
             catch (Exception ex)
             {
                 CLogger.Instance.error("writeTextFile", "{0} cannot read", path);
-                throw new Exception("");
+                throw ex;
             }
         }
 

@@ -27,16 +27,27 @@ namespace ns_artDesk
 
         public ArtFrame()
         {
-            var cw = getControlWindow();
+            //var cw = getControlWindow();
         }
 
         public override FrameworkElement getUI()
         {
             return getMainWindow();
         }
-        public MainWindow getMainWindow()
+        public MainWindow getMainWindow()//care
         {
-            return (getApp().MainWindow) as MainWindow;
+            return getApp().MainWindow as MainWindow;
+        }
+
+        public BrowserWindow getBrowserWindow()//care
+        {
+            return getApp().MainWindow as BrowserWindow;
+        }
+
+        public Grid getBrowserViewContainer()
+        {
+            //return getMainWindow().mBrowserView;
+            return getBrowserWindow().mBrowserView;
         }
 
         public ControlWindow getControlWindow()

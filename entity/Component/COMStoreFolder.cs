@@ -12,6 +12,7 @@ namespace ns_artDesk
             ls.doGetItem = () =>
             {
                 ListEx<COMListItem> items = new ListEx<COMListItem>();
+                items.pushBack(ArtBrowser.Instance.backward.getComponent<COMListItem>());
                 var tags = CArtAppList.Instance.getAllTags();
                 foreach (var tag in tags)
                 {

@@ -49,5 +49,10 @@ namespace ns_artDesk
                 return ui;
             };
         }
+
+        public void run()
+        {
+
+        }
     }
 }

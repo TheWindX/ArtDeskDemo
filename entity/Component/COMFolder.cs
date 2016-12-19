@@ -20,6 +20,9 @@ namespace ns_artDesk
                 ListEx<COMListItem> r = new ListEx<COMListItem>();
                 var fid = config.id;
 
+                var item = instance<COMUpward>().getComponent<COMListItem>();
+                r.pushBack(item);
+
                 foreach (var conf in DesktopList.Instance.items)
                 {
                     if (conf.folder_id == fid)

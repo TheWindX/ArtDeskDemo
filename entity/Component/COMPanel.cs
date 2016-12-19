@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace ns_artDesk
 {
@@ -20,7 +22,6 @@ namespace ns_artDesk
                 {
                     mUI = new UIFolder();
                 }
-                mUI.mDesk.Children.Clear();//TODO?
                 return mUI;
             };
 
@@ -31,18 +32,27 @@ namespace ns_artDesk
         internal Func<UIFolder> doGetUI = null;
         public UIFolder getUI()
         {
-            return doGetUI();
+            mUI = doGetUI();
+            mUI.mDesk.Children.Clear();//TODO?
+            return mUI;
         }
 
         public void setDesktop()
         {
-            ArtFrame.Instance.getMainWindow().mFrame.Children.Clear();
+            ArtFrame.Instance.getBrowserViewContainer().Children.Clear();
             var ui = getUI();
-            ArtFrame.Instance.getMainWindow().mFrame.Children.Add(ui);
+            ui.mDesk.Children.Clear();
+            ArtFrame.Instance.getBrowserViewContainer().Children.Add(ui);
+
             var items = getComponent<COMLister>().items;
             foreach(var item in items)
             {
                 var icon = item.getComponent<COMIcon>().getUI();
+                if (icon.Parent != null)
+                {
+                    CLogger.Instance.info("setDesktop", icon.Parent.ToString());
+                    (icon.Parent as Panel).Children.Remove(icon);
+                }
                 icon.lister = getComponent<COMLister>();
                 ui.mDesk.Children.Add(icon);
             }

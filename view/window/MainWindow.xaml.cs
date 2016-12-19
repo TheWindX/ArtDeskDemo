@@ -1,11 +1,14 @@
-﻿using ns_artDesk.core;
+﻿using Microsoft.Win32;
+using ns_artDesk.core;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ns_artDesk
 {
@@ -21,7 +24,6 @@ namespace ns_artDesk
         
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Left = this.Top = 0;
             this.Topmost = true;
             this.ResizeMode = ResizeMode.NoResize;
             this.WindowState = WindowState.Maximized;
@@ -30,10 +32,33 @@ namespace ns_artDesk
             IntPtr windowHandle = (new WindowInteropHelper(this)).Handle;
             HwndSource src = HwndSource.FromHwnd(windowHandle);
             src.AddHook(new HwndSourceHook(WndProc));
-            Width = System.Windows.SystemParameters.WorkArea.Width;
-            Height = System.Windows.SystemParameters.WorkArea.Height;
+
+            var w = SystemParameters.WorkArea.Width;
+            var h = SystemParameters.WorkArea.Height;
+            this.Width = w;
+            this.Height = h;
+            this.Left = this.Top = 0;
+
+            CLogger.Instance.info("ArtDesk", "construct ArtDesk of width:{0}, height:{1}", w, h);
+            syncWallPaper();
         }
-        
+
+        public void syncWallPaper()
+        {
+            string path = (string)Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop").GetValue("WallPaper");
+            if (path == null) path = "";
+            if (File.Exists(path))
+            {
+                CLogger.Instance.info("ArtDesk", "try to set wallpaper at path {0}", path);
+                var t = mBrowserView.Background = new ImageBrush(new BitmapImage(new Uri(path)));
+            }
+            else
+            {
+                CLogger.Instance.info("ArtDesk", "wallpaper of {0} doesn't exist, set background black", path);
+                mBrowserView.Background = new SolidColorBrush(Colors.Black);
+            }
+        }
+
         private IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if(msg == WM_SETFOCUS)

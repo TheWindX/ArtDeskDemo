@@ -49,6 +49,90 @@ namespace ns_artDesk
             }
         }
 
+        ImageSource mUpwardIcon = null;
+        public ImageSource upwardIcon
+        {
+            get
+            {
+                if (mUpwardIcon == null)
+                {
+                    var path = "resource/upward.svg";
+                    using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        mUpwardIcon = SvgReader.Load(stream);
+                    }
+                }
+                return mUpwardIcon;
+            }
+        }
+
+        ImageSource mLeft = null;
+        public ImageSource left
+        {
+            get
+            {
+                if (mLeft == null)
+                {
+                    var path = "resource/left.svg";
+                    using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        mLeft = SvgReader.Load(stream);
+                    }
+                }
+                return mLeft;
+            }
+        }
+
+        ImageSource mRight = null;
+        public ImageSource right
+        {
+            get
+            {
+                if (mRight == null)
+                {
+                    var path = "resource/right.svg";
+                    using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        mRight = SvgReader.Load(stream);
+                    }
+                }
+                return mRight;
+            }
+        }
+
+        ImageSource mRefresh = null;
+        public ImageSource refresh
+        {
+            get
+            {
+                if (mRefresh == null)
+                {
+                    var path = "resource/refresh.svg";
+                    using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        mRefresh = SvgReader.Load(stream);
+                    }
+                }
+                return mRefresh;
+            }
+        }
+
+        ImageSource mMenu = null;
+        public ImageSource menu
+        {
+            get
+            {
+                if (mMenu == null)
+                {
+                    var path = "resource/menu.svg";
+                    using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        mMenu = SvgReader.Load(stream);
+                    }
+                }
+                return mMenu;
+            }
+        }
         //TODO, load icon as img source, from remote
 
 

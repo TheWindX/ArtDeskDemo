@@ -17,10 +17,16 @@ namespace ns_artDesk
         public string title { get; set; }
         [SerializedProp]
         public string desc { get; set; }
+        /*
+         * external_installation
+         * external_green
+         */
         [SerializedProp]
-        public string type { get; set; }
+        public string type { get; set; } 
         [SerializedProp]
         public List<string> tags { get; set; }
+        [SerializedProp]
+        public string link_path { get; set; }
     }
 
     public class CArtApp
@@ -28,10 +34,11 @@ namespace ns_artDesk
         [SerializedProp]
         public string path { get; set; }
 
-        
-
         [SerializedProp]
         public CArtAppMeta meta { get; set; }
+
+        bool isInstall = false;
+        bool isUpdated = true;
     }
 
 
@@ -40,6 +47,11 @@ namespace ns_artDesk
         const string file = "app_list.xml";
         [SerializedProp]
         public List<CArtApp> apps { get; set; }
+
+        public CArtAppList()
+        {
+            load();
+        }
 
         //取得配置文件
         internal void load()

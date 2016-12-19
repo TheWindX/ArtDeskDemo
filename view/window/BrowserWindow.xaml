@@ -1,0 +1,44 @@
+﻿<Window x:Class="ns_artDesk.BrowserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ns_artDesk"
+        mc:Ignorable="d"
+        Title="BrowserWindow" Height="300" Width="300" Loaded="Window_Loaded" Initialized="Window_Initialized" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="32"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Button x:Name="mBackwardBtn" Width="32">
+                    <Image x:Name="mBackImg"></Image>
+                </Button>
+                <Button x:Name="mForwardBtn" Width="32">
+                    <Image x:Name="mForwardImg"></Image>
+                </Button>
+                <Button x:Name="mFlushBtn" Width="32">
+                    <Image x:Name="mRefresh"></Image>
+                </Button>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <StackPanel x:Name="mAdressBox" Orientation="Horizontal"></StackPanel>
+                <Border Background="#38DCDCDC" BorderThickness="1" CornerRadius="4"></Border>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Button x:Name="mMenuBtn">
+                    <Image x:Name="mMenuImg"></Image>
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid x:Name="mBrowserView" Grid.Row="1">
+        </Grid>
+    </Grid>
+</Window>
