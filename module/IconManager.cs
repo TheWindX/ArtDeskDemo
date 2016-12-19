@@ -56,7 +56,7 @@ namespace ns_artDesk
             {
                 if (mUpwardIcon == null)
                 {
-                    var path = "resource/upward.svg";
+                    var path = "resource/left.svg";
                     using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                     {
                         mUpwardIcon = SvgReader.Load(stream);

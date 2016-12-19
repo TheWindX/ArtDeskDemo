@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ns_artDesk"
         mc:Ignorable="d"
-        Title="BrowserWindow" Height="300" Width="300" Loaded="Window_Loaded" Initialized="Window_Initialized" Closing="Window_Closing">
+        Title="Asset Browser for Creator" Height="600" Width="800" Loaded="Window_Loaded" Initialized="Window_Initialized" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"></RowDefinition>
@@ -30,7 +30,7 @@
             </StackPanel>
             <Grid Grid.Column="1">
                 <StackPanel x:Name="mAdressBox" Orientation="Horizontal"></StackPanel>
-                <Border Background="#38DCDCDC" BorderThickness="1" CornerRadius="4"></Border>
+                <Border BorderThickness="2" CornerRadius="4" BorderBrush="Black" Background="#38000000"/>
             </Grid>
             <Grid Grid.Column="2">
                 <Button x:Name="mMenuBtn">

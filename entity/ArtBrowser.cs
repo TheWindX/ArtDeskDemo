@@ -59,7 +59,6 @@ namespace ns_artDesk
             mStore = CComponent.instance<COMStoreFolder>();
             mDestop = CComponent.instance<COMDesktop>();
             mBackward = CComponent.instance<COMUpward>();
-            mRoot.items.pushBack(backward.getComponent<COMListItem>());
             mRoot.items.pushBack(mDestop.getComponent<COMListItem>());
             mRoot.items.pushBack(mStore.getComponent<COMListItem>());
             history.add(mRoot);

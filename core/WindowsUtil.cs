@@ -148,7 +148,13 @@ namespace ns_artDesk.core
             if (File.Exists(path))
             {
                 CLogger.Instance.info("ArtDesk", "try to set wallpaper at path {0}", path);
-                var t = ui.Background = new ImageBrush(new BitmapImage(new Uri(path)));
+                var b = new ImageBrush(new BitmapImage(new Uri(path)));
+                b.Stretch = Stretch.None;
+                b.TileMode = TileMode.None;
+                b.AlignmentX = AlignmentX.Left;
+                b.AlignmentY = AlignmentY.Top;
+                ui.Background = b;
+                
             }
             else
             {
