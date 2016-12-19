@@ -30,7 +30,7 @@
             </StackPanel>
             <Grid Grid.Column="1">
                 <StackPanel x:Name="mAdressBox" Orientation="Horizontal"></StackPanel>
-                <Border BorderThickness="2" CornerRadius="4" BorderBrush="Black" Background="#38000000"/>
+                <Border BorderThickness="1" CornerRadius="4" BorderBrush="Black" Background="#38000000"/>
             </Grid>
             <Grid Grid.Column="2">
                 <Button x:Name="mMenuBtn">
