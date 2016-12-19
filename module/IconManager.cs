@@ -22,7 +22,7 @@ namespace ns_artDesk
             {
                 if(mFolderIcon == null)
                 {
-                    var path = "resource/chrome.svg";
+                    var path = "resource/folder.svg";
                     using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                     {
                         mFolderIcon = SvgReader.Load(stream);

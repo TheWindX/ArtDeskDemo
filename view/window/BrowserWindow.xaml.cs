@@ -27,6 +27,8 @@ namespace ns_artDesk
             mForwardImg.Source = IconManager.Instance.right;
             mRefresh.Source = IconManager.Instance.refresh;
             mMenuImg.Source = IconManager.Instance.menu;
+
+            WindowsUtil.syncWallPaper(mBrowserView);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -48,6 +50,16 @@ namespace ns_artDesk
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             CDriver.Instance.exit();
+        }
+
+        private void mForwardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CEventHub.Instance.forward();
+        }
+
+        private void mBackwardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CEventHub.Instance.backward();
         }
     }
 }

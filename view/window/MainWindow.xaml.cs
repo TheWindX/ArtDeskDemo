@@ -40,25 +40,9 @@ namespace ns_artDesk
             this.Left = this.Top = 0;
 
             CLogger.Instance.info("ArtDesk", "construct ArtDesk of width:{0}, height:{1}", w, h);
-            syncWallPaper();
+            WindowsUtil.syncWallPaper(mBrowserView);
         }
-
-        public void syncWallPaper()
-        {
-            string path = (string)Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop").GetValue("WallPaper");
-            if (path == null) path = "";
-            if (File.Exists(path))
-            {
-                CLogger.Instance.info("ArtDesk", "try to set wallpaper at path {0}", path);
-                var t = mBrowserView.Background = new ImageBrush(new BitmapImage(new Uri(path)));
-            }
-            else
-            {
-                CLogger.Instance.info("ArtDesk", "wallpaper of {0} doesn't exist, set background black", path);
-                mBrowserView.Background = new SolidColorBrush(Colors.Black);
-            }
-        }
-
+        
         private IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if(msg == WM_SETFOCUS)

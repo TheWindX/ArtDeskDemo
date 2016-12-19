@@ -3,6 +3,7 @@
  * mail: 453588006@qq.com
  * desc: 
  * */
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ns_artDesk.core
 {
@@ -134,6 +138,22 @@ namespace ns_artDesk.core
             {
                 CLogger.Instance.error("writeTextFile", "{0} cannot read", path);
                 throw ex;
+            }
+        }
+
+        public static void syncWallPaper(Grid ui)
+        {
+            string path = (string)Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop").GetValue("WallPaper");
+            if (path == null) path = "";
+            if (File.Exists(path))
+            {
+                CLogger.Instance.info("ArtDesk", "try to set wallpaper at path {0}", path);
+                var t = ui.Background = new ImageBrush(new BitmapImage(new Uri(path)));
+            }
+            else
+            {
+                CLogger.Instance.info("ArtDesk", "wallpaper of {0} doesn't exist, set background black", path);
+                ui.Background = new SolidColorBrush(Colors.Black);
             }
         }
 

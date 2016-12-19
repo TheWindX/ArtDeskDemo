@@ -17,11 +17,6 @@ namespace ns_artDesk
             }
         }
 
-        Stack<COMLister> history
-        {
-            get;set;
-        }
-
         COMLister mRoot = null;
         public COMLister root
         {
@@ -67,27 +62,37 @@ namespace ns_artDesk
             mRoot.items.pushBack(backward.getComponent<COMListItem>());
             mRoot.items.pushBack(mDestop.getComponent<COMListItem>());
             mRoot.items.pushBack(mStore.getComponent<COMListItem>());
-            history = new Stack<COMLister>();
-            history.Push(mRoot);
+            history.add(mRoot);
+
+            CEventHub.Instance.evtBackward += () =>
+            {
+                var ls = history.undo();
+                if(ls != null)
+                {
+                    ls.getComponent<COMPanel>().setDesktop();
+                }
+            };
+
+            CEventHub.Instance.evtForward += () =>
+            {
+                var ls = history.redo();
+                if (ls != null)
+                {
+                    ls.getComponent<COMPanel>().setDesktop();
+                }
+            };
         }
 
-        public COMLister current
-        {
-            get;
-            private set;
-        }
-
+        DataHistory<COMLister> history = new DataHistory<COMLister>();
         public void accessInto(COMLister ls)
         {
-            history.Push(current);
-            current = ls;
-            current.getComponent<COMPanel>().setDesktop();
+            history.add(ls);
+            ls.getComponent<COMPanel>().setDesktop();
         }
 
         public void exitFrom()
         {
-            var last = history.Pop();
-            current = last;
+            var current = history.undo();
             current.getComponent<COMPanel>().setDesktop();
         }
 

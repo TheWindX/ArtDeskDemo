@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="core\CDispatcher.cs" />
     <Compile Include="core\CSerializer.cs" />
+    <Compile Include="core\DataBackup.cs" />
     <Compile Include="core\Util\FileSystemUtil.cs" />
     <Compile Include="entity\ArtBrowser.cs" />
     <Compile Include="entity\Component\COMDesktop.cs" />

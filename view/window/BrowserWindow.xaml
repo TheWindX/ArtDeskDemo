@@ -18,10 +18,10 @@
                 <ColumnDefinition Width="32"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Button x:Name="mBackwardBtn" Width="32">
+                <Button x:Name="mBackwardBtn" Width="32" Click="mBackwardBtn_Click">
                     <Image x:Name="mBackImg"></Image>
                 </Button>
-                <Button x:Name="mForwardBtn" Width="32">
+                <Button x:Name="mForwardBtn" Width="32" Click="mForwardBtn_Click">
                     <Image x:Name="mForwardImg"></Image>
                 </Button>
                 <Button x:Name="mFlushBtn" Width="32">

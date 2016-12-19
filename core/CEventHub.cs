@@ -45,6 +45,23 @@ namespace ns_artDesk.core
         {
             evtGlobalKeyUp?.Invoke(k);
         }
+
+
+        public event System.Action evtBackward;
+        public event System.Action evtForward;
+
+        internal void backward()
+        {
+            evtBackward?.Invoke();
+        }
+
+        internal void forward()
+        {
+            evtForward?.Invoke();
+        }
+
+
+
         //public static event System.Action<double, double> evtLeftMouseUp = null;
         //public static event System.Action<double, double> evtLeftMouseDown = null;
         //public static event System.Action<double, double> evtLeftMouseDrag = null;

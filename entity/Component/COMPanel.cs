@@ -37,6 +37,7 @@ namespace ns_artDesk
             return mUI;
         }
 
+        
         public void setDesktop()
         {
             ArtFrame.Instance.getBrowserViewContainer().Children.Clear();
