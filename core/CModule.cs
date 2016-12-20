@@ -111,7 +111,7 @@ namespace ns_artDesk.core
                 }
                 catch (Exception ex)
                 {
-                    CLogger.Instance.error("CRuntime", ex.Message);
+                    CLogger.Instance.error("CRuntime", ex.ToString());
                 }
                 mActions.RemoveAt(idx);
             }

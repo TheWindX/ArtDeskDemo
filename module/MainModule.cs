@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ns_artDesk
 {
     [ModuleInstance(0)]
-    class LogicModule : CModule
+    class MainModule : CModule
     {
         public void onExit()
         {
@@ -18,15 +18,15 @@ namespace ns_artDesk
         public void onInit()
         {
             //1. 加载配置
-            CLogger.Instance.info("LogicModule", "config.xml is loading");
+            CLogger.Instance.info("MainModule", "config.xml is loading");
             Config.Instance.load();
-            CLogger.Instance.info("LogicModule", "config.xml is loaded");
-            CLogger.Instance.info("LogicModule", "app_list.xml is loading");
+            CLogger.Instance.info("MainModule", "config.xml is loaded");
+            CLogger.Instance.info("MainModule", "app_list.xml is loading");
             CArtAppList.Instance.load();
-            CLogger.Instance.info("LogicModule", "app_list.xml is loaded");
-            CLogger.Instance.info("LogicModule", "desktop_list.xml is loading");
+            CLogger.Instance.info("MainModule", "app_list.xml is loaded");
+            CLogger.Instance.info("MainModule", "desktop_list.xml is loading");
             DesktopList.Instance.load();
-            CLogger.Instance.info("LogicModule", "desktop_list.xml is loaded");
+            CLogger.Instance.info("MainModule", "desktop_list.xml is loaded");
 
             //2生成browser
             //3desktop 定位到 mainwindow.uidesk

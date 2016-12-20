@@ -107,7 +107,7 @@ namespace ns_artDesk.core
             }
             else if (t == typeof(double))
             {
-                instance = Convert.ToInt32(elem.GetAttribute("value"));
+                instance = Convert.ToDouble(elem.GetAttribute("value"));
             }
             else if (t == typeof(string))
             {
