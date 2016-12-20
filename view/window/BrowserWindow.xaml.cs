@@ -93,6 +93,15 @@ namespace ns_artDesk
                 mAdressBox.Children.Add(b);
             }
         }
-        
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            CEventHub.Instance.keydown(e.Key);
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            CEventHub.Instance.keyup(e.Key);
+        }
     }
 }

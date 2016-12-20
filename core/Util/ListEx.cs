@@ -50,6 +50,18 @@ namespace ns_artDesk.core
             mContainer.Insert(i, v);
         }
 
+        public T leftOf(T v, bool cir = false)
+        {
+            int i = mContainer.IndexOf(v);
+            i--;
+            if (i < 0)
+            {
+                if (!cir) return null;
+                i = mContainer.Count - 1;
+            }
+            return mContainer[i];
+        }
+
         public void stepRight(T v, bool cir = false)
         {
             int i = mContainer.IndexOf(v);
@@ -61,6 +73,18 @@ namespace ns_artDesk.core
             }
             mContainer.Remove(v);
             mContainer.Insert(i, v);
+        }
+
+        public T rightOf(T v, bool cir = false)
+        {
+            int i = mContainer.IndexOf(v);
+            i++;
+            if (i == mContainer.Count)
+            {
+                if (!cir) return null;
+                i = 0;
+            }
+            return mContainer[i];
         }
 
         public void insertBefore(T v, T u)
@@ -78,6 +102,8 @@ namespace ns_artDesk.core
             int i = mContainer.IndexOf(u);
             mContainer.Insert(i + 1, v);
         }
+
+        
 
         public IEnumerator<T> GetEnumerator()
         {

@@ -87,32 +87,61 @@ namespace ns_artDesk
             {
                 if (key == System.Windows.Input.Key.Return)
                 {
-                    exitFrom();
-                }
-                else if(key == System.Windows.Input.Key.Enter)
-                {
                     var choose = history.data.getChoosed();
-                    var ls = choose.getComponent<COMLister>();
-                    if(ls != null)
+                    if(choose != null)
                     {
-                        accessInto(ls);
+                        var ls = choose.getComponent<COMLister>();
+                        if (ls != null)
+                        {
+                            accessInto(ls);
+                        }
+                        else if (choose.getComponent<COMUpward>() != null)
+                        {
+                            exitFrom();
+                        }
                     }
+                }
+                else if(key == System.Windows.Input.Key.Back)
+                {
+                    exitFrom();
                 }
                 else if(key == System.Windows.Input.Key.Left)
                 {
-
+                    var choose = history.data.getChoosed();
+                    if(choose == null)
+                    {
+                        var i = history.data.currentItems().Last();
+                        i.getComponent<COMIcon>().currentUI().choosed = true;
+                    }
+                    else
+                    {
+                        var i = history.data.currentItems().leftOf(choose, true);
+                        i.getComponent<COMIcon>().currentUI().choosed = true;
+                    }
                 }
                 else if(key == System.Windows.Input.Key.Right)
                 {
-
+                    var choose = history.data.getChoosed();
+                    if (choose == null)
+                    {
+                        var i = history.data.currentItems().First();
+                        i.getComponent<COMIcon>().currentUI().choosed = true;
+                    }
+                    else
+                    {
+                        var i = history.data.currentItems().rightOf(choose, true);
+                        i.getComponent<COMIcon>().currentUI().choosed = true;
+                    }
                 }
                 else if(key == System.Windows.Input.Key.Home)
                 {
-
+                    var i = history.data.currentItems().First();
+                    i.getComponent<COMIcon>().currentUI().choosed = true;
                 }
                 else if(key == System.Windows.Input.Key.End)
                 {
-
+                    var i = history.data.currentItems().Last();
+                    i.getComponent<COMIcon>().currentUI().choosed = true;
                 }
             };
         }
@@ -128,8 +157,11 @@ namespace ns_artDesk
         public void exitFrom()
         {
             var current = history.undo();
-            current.getComponent<COMPanel>().setView();
-            CEventHub.Instance.gotoURL(history.ToList());
+            if(current != null)
+            {
+                current.getComponent<COMPanel>().setView();
+                CEventHub.Instance.gotoURL(history.ToList());
+            }
         }
 
         public void setView()
