@@ -61,5 +61,18 @@ namespace ns_artDesk
         {
             CEventHub.Instance.backward();
         }
+
+        private void mMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var cm = new ContextMenu();
+            var mi = new MenuItem();
+            cm.Items.Add(mi);
+            mi.Header = "控制台";
+            mi.Click += (ui, arg) =>
+            {
+                CSRepl.Instance.Toggle();
+            };
+            cm.IsOpen = true;
+        }
     }
 }

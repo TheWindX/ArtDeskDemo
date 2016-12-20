@@ -33,7 +33,7 @@
                 <Border BorderThickness="1" CornerRadius="4" BorderBrush="Black" Background="#38000000"/>
             </Grid>
             <Grid Grid.Column="2">
-                <Button x:Name="mMenuBtn">
+                <Button x:Name="mMenuBtn" Click="mMenuBtn_Click">
                     <Image x:Name="mMenuImg"></Image>
                 </Button>
             </Grid>

@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="core\CDispatcher.cs" />
     <Compile Include="core\CSerializer.cs" />
+    <Compile Include="core\CSRepl.cs" />
     <Compile Include="core\DataBackup.cs" />
     <Compile Include="core\Util\FileSystemUtil.cs" />
     <Compile Include="entity\ArtBrowser.cs" />
@@ -106,7 +107,9 @@
     <Compile Include="entity\configs\ArtAppList.cs" />
     <Compile Include="entity\configs\Config.cs" />
     <Compile Include="entity\configs\DesktopList.cs" />
+    <Compile Include="export\GM.cs" />
     <Compile Include="module\AppStatModule.cs" />
+    <Compile Include="module\ConsoleModule.cs" />
     <Compile Include="module\IconManager.cs" />
     <Compile Include="module\LogicModule.cs" />
     <Compile Include="view\widget\UIFolder.xaml.cs">
