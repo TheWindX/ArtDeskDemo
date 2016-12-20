@@ -22,7 +22,6 @@ namespace ns_artDesk.core
             {
                 mTask.Enqueue(act);
             }
-            
         }
 
         public void init()

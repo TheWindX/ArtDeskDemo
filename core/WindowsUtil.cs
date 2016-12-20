@@ -79,8 +79,7 @@ namespace ns_artDesk.core
                 public Int32 Flags;
             }
         }
-
-
+        
         #region system
         //最大硬盘目录
         public static DirectoryInfo getMaxFreeSpaceDriverDir()
@@ -154,12 +153,12 @@ namespace ns_artDesk.core
                 b.AlignmentX = AlignmentX.Left;
                 b.AlignmentY = AlignmentY.Top;
                 ui.Background = b;
-                
+
             }
             else
             {
                 CLogger.Instance.info("ArtDesk", "wallpaper of {0} doesn't exist, set background black", path);
-                ui.Background = new SolidColorBrush(Colors.Black);
+                ui.Background = new SolidColorBrush(Colors.Gray);
             }
         }
 

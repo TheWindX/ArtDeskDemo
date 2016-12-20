@@ -29,6 +29,8 @@ namespace ns_artDesk
             mMenuImg.Source = IconManager.Instance.menu;
 
             WindowsUtil.syncWallPaper(mBrowserView);
+
+            CEventHub.Instance.evtURLChanged += setURL;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -74,5 +76,23 @@ namespace ns_artDesk
             };
             cm.IsOpen = true;
         }
+
+        internal void setURL(List<COMLister> ls)
+        {
+            mAdressBox.Children.Clear();
+            for(int i = 0; i<ls.Count; ++i)
+            {
+                var item = ls[i];
+                var b = new UIAdressButton();
+                var url = ls.Take(i+1).ToList();
+                b.evtClick += ()=>
+                {
+                    ArtBrowser.Instance.setAddress(url);
+                };
+                b.title = item.getComponent<COMIcon>().currentUI().title;
+                mAdressBox.Children.Add(b);
+            }
+        }
+        
     }
 }

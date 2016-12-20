@@ -23,7 +23,7 @@ namespace ns_artDesk
             return mItem;
         }
 
-        ListEx<COMListItem> mItem = null;
+        internal ListEx<COMListItem> mItem = null;
         public override void onAwake()
         {
             doGetItem = () =>
@@ -42,6 +42,16 @@ namespace ns_artDesk
             {
                 ArtBrowser.Instance.accessInto(this);
             };
+        }
+
+        public COMListItem getChoosed()
+        {
+            foreach(var item in currentItems())
+            {
+                if (item.getComponent<COMIcon>().getUI().choosed)
+                    return item;
+            }
+            return null;
         }
     }
 }

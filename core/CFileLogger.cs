@@ -4,12 +4,7 @@
  * desc: 文件logger
  * */
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ns_artDesk.core
 {

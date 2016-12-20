@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="view\widget\UIAdressButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\widget\UIFolder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,7 +106,6 @@
     <Compile Include="entity\Component\COMPanel.cs" />
     <Compile Include="entity\Component\COMStoreFolder.cs" />
     <Compile Include="entity\Component\COMStoreTag.cs" />
-    <Compile Include="entity\Component\COMRoot.cs" />
     <Compile Include="entity\Component\COMUpward.cs" />
     <Compile Include="entity\configs\ArtAppList.cs" />
     <Compile Include="entity\configs\Config.cs" />
@@ -111,7 +114,10 @@
     <Compile Include="module\AppStatModule.cs" />
     <Compile Include="module\ConsoleModule.cs" />
     <Compile Include="module\IconManager.cs" />
-    <Compile Include="module\LogicModule.cs" />
+    <Compile Include="module\MainModule.cs" />
+    <Compile Include="view\widget\UIAdressButton.xaml.cs">
+      <DependentUpon>UIAdressButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\widget\UIFolder.xaml.cs">
       <DependentUpon>UIFolder.xaml</DependentUpon>
     </Compile>

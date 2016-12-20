@@ -17,11 +17,19 @@ namespace ns_artDesk.core
 {
     class CEventHub : Singleton<CEventHub>
     {
+        //桌面按键消息
         public event System.Action<Key> evtKeyDown = null;
         public event System.Action<Key> evtKeyUp = null;
 
         public event System.Action<Key> evtGlobalKeyDown = null;
         public event System.Action<Key> evtGlobalKeyUp = null;
+
+        //浏览前进或后退
+        public event System.Action evtBackward;
+        public event System.Action evtForward;
+
+        //浏览跳转事件
+        public event System.Action<List<COMLister>> evtURLChanged;
 
         //public event System.Action<float, float> evtScreenMouseMove = null;
         //public event System.Action leftKey  = null;
@@ -45,11 +53,7 @@ namespace ns_artDesk.core
         {
             evtGlobalKeyUp?.Invoke(k);
         }
-
-
-        public event System.Action evtBackward;
-        public event System.Action evtForward;
-
+        
         internal void backward()
         {
             evtBackward?.Invoke();
@@ -60,7 +64,10 @@ namespace ns_artDesk.core
             evtForward?.Invoke();
         }
 
-
+        internal void gotoURL(List<COMLister> ls)
+        {
+            evtURLChanged?.Invoke(ls);
+        }
 
         //public static event System.Action<double, double> evtLeftMouseUp = null;
         //public static event System.Action<double, double> evtLeftMouseDown = null;

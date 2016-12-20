@@ -1,4 +1,9 @@
-﻿
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: 驱动
+ * */
+
 namespace ns_artDesk.core
 {
     using System;
@@ -7,7 +12,6 @@ namespace ns_artDesk.core
     using Microsoft.CSharp;
     using System.Threading;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
     using System.IO;
     using Microsoft.Win32.SafeHandles;
     using System.Text;

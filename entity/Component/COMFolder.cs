@@ -41,6 +41,7 @@ namespace ns_artDesk
                         }
                     }
                 }
+                ls.mItem = r;
                 return r;
             };
 

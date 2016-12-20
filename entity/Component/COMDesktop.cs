@@ -36,6 +36,7 @@ namespace ns_artDesk
                         }
                     }
                 }
+                list.mItem = r;
                 return r;
             };
 
@@ -43,9 +44,12 @@ namespace ns_artDesk
             icon.doGetUI = () =>
             {
                 var ui = icon.doGetUIBase();
-                ui.title = "桌面";
+                ui.title = title;
                 return ui;
             };
+            icon.currentUI().title = title;
         }
+
+        const string title = "桌面";
     }
 }

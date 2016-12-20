@@ -38,7 +38,7 @@ namespace ns_artDesk
                     appItem.app_config = cfg;
                     items.pushBack(appItem.getComponent<COMListItem>());
                 }
-
+                ls.mItem = items;
                 return items;
             };
         }

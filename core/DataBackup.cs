@@ -1,9 +1,12 @@
-﻿using System;
+﻿/*
+ * author: xiaofeng.li
+ * mail: 453588006@qq.com
+ * desc: 驱动
+ * */
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ns_artDesk.core
 {
@@ -63,12 +66,18 @@ namespace ns_artDesk.core
 
         public IEnumerator<Data> GetEnumerator()
         {
-            return mDataBackup.GetEnumerator();
+            return mDataBackup.Take(dataIdx + 1).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return mDataBackup.GetEnumerator();
+            return mDataBackup.Take(dataIdx+1).GetEnumerator();
+        }
+
+        public void clear()
+        {
+            mDataBackup.Clear();
+            dataIdx = -1;
         }
     }
 }

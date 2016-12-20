@@ -133,6 +133,25 @@ namespace ns_artDesk
                 return mMenu;
             }
         }
+
+        ImageSource mStore = null;
+        public ImageSource store
+        {
+            get
+            {
+                if (mStore == null)
+                {
+                    var path = "resource/store.svg";
+                    using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        mStore = SvgReader.Load(stream);
+                    }
+                }
+                return mStore;
+            }
+        }
+
+
         //TODO, load icon as img source, from remote
 
 

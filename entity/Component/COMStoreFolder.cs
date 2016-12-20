@@ -20,11 +20,14 @@ namespace ns_artDesk
                     tagItem.tag = tag;
                     items.pushBack(tagItem.getComponent<COMListItem>());
                 }
+                ls.mItem = items;
                 return items;
             };
 
             var icon = getComponent<COMIcon>();
-            icon.getUI().title = "应用号";
+            var ui = icon.getUI();
+            ui.title = "app store";
+            ui.mIcon.Source = IconManager.Instance.store;
         }
     }
 }
